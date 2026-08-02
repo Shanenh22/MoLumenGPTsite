@@ -9,8 +9,7 @@ const isCurrent = (href: string) =>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="Mo Lumen Astrology, home">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span><strong>Mo Lumen</strong><small>Astrology</small></span>
+      <img src="/images/mo-lumen-logo.png" alt="" width="316" height="193" decoding="async" />
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       {navigation.map((item) => (
@@ -118,41 +117,14 @@ const isCurrent = (href: string) =>
     gap: 1rem;
   }
   .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
+    display: block;
+    width: clamp(11.5rem, 16vw, 14.5rem);
     text-decoration: none;
   }
   .brand:hover {
     color: var(--gold-light);
   }
-  .brand-mark {
-    display: grid;
-    width: 2.25rem;
-    height: 2.25rem;
-    place-items: center;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    color: var(--gold);
-  }
-  .brand strong,
-  .brand small {
-    display: block;
-    line-height: 1.05;
-  }
-  .brand strong {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--white);
-  }
-  .brand small {
-    margin-top: 0.2rem;
-    color: var(--gold-light);
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
+  .brand img { display: block; width: 100%; height: auto; max-height: 3.8rem; object-fit: contain; object-position: left center; }
   .desktop-nav {
     display: flex;
     align-items: center;
@@ -306,5 +278,11 @@ const isCurrent = (href: string) =>
       display: flex;
     }
     .mobile-actions { display: flex; }
+    .brand { width: 9.5rem; }
+  }
+  @media (max-width: 390px) {
+    .brand { width: 8.5rem; }
+    .mobile-book { padding-inline: .7rem; }
+    .menu-button { gap: .4rem; padding-inline: .35rem; }
   }
 </style>

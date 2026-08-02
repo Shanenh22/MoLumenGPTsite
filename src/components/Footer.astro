@@ -5,8 +5,7 @@ import { footerGroups, site } from '../data/site';
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-intro">
-      <span class="footer-symbol" aria-hidden="true">✦</span>
-      <h2>{site.name}</h2>
+      <img class="footer-logo" src="/images/mo-lumen-logo.png" alt={site.name} width="316" height="193" loading="lazy" decoding="async" />
       <p>
         Warm, practical astrology with a classical lens. Perspective for your choices—not a verdict.
       </p>
@@ -50,10 +49,7 @@ import { footerGroups, site } from '../data/site';
   .footer-intro {
     max-width: 24rem;
   }
-  .footer-symbol {
-    color: var(--gold-light);
-    font-size: 2rem;
-  }
+  .footer-logo { width: min(13rem, 80%); height: auto; margin-bottom: 1rem; }
   .site-footer h2 {
     font-size: var(--step-2);
   }
