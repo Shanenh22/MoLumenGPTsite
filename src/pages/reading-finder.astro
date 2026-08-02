@@ -24,7 +24,8 @@ import PageHero from '../components/PageHero.astro';
       </div><div class="finder-panel" tabindex="-1"></div><div class="finder-actions">
         <button class="button secondary back" type="button" disabled>Back</button><button
           class="restart"
-          type="button">Restart</button>
+          type="button">Restart</button
+        >
       </div>
     </div>
   </section>
@@ -39,33 +40,36 @@ import PageHero from '../components/PageHero.astro';
 <script>
   const steps = [
     {
+      question: 'Have you already completed a natal chart reading with Mo?',
+      options: [
+        ['new', 'No, I am a new client'],
+        ['returning', 'Yes, I am an established client'],
+      ],
+    },
+    {
       question: 'What are you hoping to understand?',
       options: [
-        ['self', 'Myself more broadly'],
-        ['current', 'A current situation or transition'],
+        ['self', 'My chart or myself more broadly'],
+        ['current', 'A current situation, transition, or one topic'],
         ['relationship', 'A relationship'],
         ['year', 'The year around my birthday'],
+        ['monthly', 'My personal transits each month'],
+        ['deeper', 'Something from an earlier reading in greater depth'],
       ],
     },
     {
-      question: 'How focused is your question?',
+      question: 'How much space does your question need?',
       options: [
-        ['broad', 'I want a wide-angle view'],
-        ['defined', 'I have a defined area of focus'],
+        ['broad', 'A wide-angle or deeper conversation'],
+        ['defined', 'One defined topic or a concise introduction'],
       ],
     },
     {
-      question: 'Is timing part of what you want to explore?',
+      question: 'If you are returning, when was your initial natal reading?',
       options: [
-        ['yes', 'Yes, timing matters'],
-        ['no', 'Not especially'],
-      ],
-    },
-    {
-      question: 'Do you have reasonably accurate birth information?',
-      options: [
-        ['exact', 'Yes, including a birth time'],
-        ['uncertain', 'Some information, but the time is uncertain'],
+        ['recent', 'Within the past three months'],
+        ['older', 'More than three months ago'],
+        ['na', 'Not applicable—I am a new client'],
       ],
     },
   ];
@@ -78,29 +82,59 @@ import PageHero from '../components/PageHero.astro';
   const status = document.querySelector<HTMLElement>('#finder-status');
   const bar = shell?.querySelector<HTMLElement>('.progress span');
   const result = () =>
-    state[0] === 'relationship'
+    state[1] === 'relationship'
       ? [
           'Relationship consultation',
-          'relationship-consultation',
+          'relationship-astrology-consultation',
           'Because your focus is the dynamic between two people, this reading brings both charts into conversation.',
         ]
-      : state[0] === 'year'
+      : state[0] === 'new' && state[2] === 'broad'
         ? [
-            'Solar return consultation',
-            'solar-return-consultation',
-            'Because you want an annual view, this reading focuses on the chart for the year around your birthday.',
+            'New Client Natal Reading — 90 min',
+            'new-client-natal-chart-reading-90',
+            'Because you are new to Mo and want a wide-angle conversation, the 90-minute natal reading offers the most room to explore your chart and questions.',
           ]
-        : state[0] === 'current' || state[2] === 'yes'
+        : state[0] === 'new'
           ? [
-              'Life changes consultation',
-              'life-changes-consultation',
-              'Because your question is connected to a present transition or timing, this reading focuses on what is being emphasized now.',
+              'New Client Natal Reading — 60 min',
+              'new-client-natal-chart-reading-60',
+              'Because you are new to Mo and have a defined focus, the 60-minute natal reading offers a concise first consultation.',
             ]
-          : [
-              'Natal chart consultation',
-              'natal-chart-consultation',
-              'Because you want a broad foundation, the natal consultation offers the widest view of your chart and life themes.',
-            ];
+          : state[1] === 'year'
+            ? [
+                'Solar Return Reading',
+                'solar-return-reading',
+                'Because you want to explore the year around your birthday and have already completed a natal reading, the Solar Return Reading is the closest fit.',
+              ]
+            : state[1] === 'monthly'
+              ? [
+                  'Monthly Personal Transits',
+                  'monthly-personal-transits',
+                  'Because you want a regular, individualized look at the moving sky, the monthly 30-minute transit consultation is designed for that rhythm.',
+                ]
+              : state[1] === 'current' && state[2] === 'defined'
+                ? [
+                    'Quick Check-In — one topic',
+                    'quick-check-in-one-topic',
+                    'Because you are an existing client with one defined topic, the 30-minute Quick Check-In is the most focused option.',
+                  ]
+                : state[1] === 'current'
+                  ? [
+                      'Life Changes Consultation',
+                      'life-changes-consultation',
+                      'Because your focus is a current transition that needs room for discussion, the Life Changes Consultation is the closest fit.',
+                    ]
+                  : state[3] === 'recent'
+                    ? [
+                        'More Clarity — within 3 months',
+                        'more-clarity-within-three-months',
+                        'Because you want to go deeper within three months of your initial natal reading, this follow-up rate applies.',
+                      ]
+                    : [
+                        'More Clarity — established client',
+                        'more-clarity-established-client',
+                        'Because you are returning to explore your chart or future influences in greater depth, the established-client follow-up is the closest fit.',
+                      ];
   const render = () => {
     if (!panel || !status || !bar || !back) return;
     back.disabled = index === 0;
@@ -120,7 +154,7 @@ import PageHero from '../components/PageHero.astro';
       const [name, slug, why] = result();
       status.textContent = 'Your recommendation';
       bar.style.width = '100%';
-      panel.innerHTML = `<div class="result"><p class="eyebrow">A reading that may fit</p><h2>${name}</h2><p>${why}</p>${state[3] === 'uncertain' ? '<p class="notice"><strong>Birth time uncertain?</strong> Mo can explain what is and is not possible before you book.</p>' : ''}<p>You may choose any service. This is a guide, not a restriction.</p><div class="button-row"><a class="button" href="/readings/${slug}/">See full details</a><a class="button secondary" href="/book/?service=${slug}">Review booking</a></div></div>`;
+      panel.innerHTML = `<div class="result"><p class="eyebrow">A reading that may fit</p><h2>${name}</h2><p>${why}</p><p>You may choose any service. This is a guide, not a restriction.</p><div class="button-row"><a class="button" href="/readings/${slug}/">See full details</a><a class="button secondary" href="/book/?service=${slug}">Review booking</a></div></div>`;
     }
     panel.focus();
   };

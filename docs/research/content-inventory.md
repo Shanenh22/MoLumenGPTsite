@@ -2,6 +2,8 @@
 
 Accessed: 2026-08-02. Scope: publicly reachable pages in the live Squarespace sitemap, crawlable navigation, and the Mo1 reference homepage. See `url-inventory.md` for the URL-level record.
 
+> **Owner-supplied update, 2026-08-02:** The appointment catalog was later supplied directly and confirms nine services with prices from $60 to $275. See `service-inventory.md`. Statements below describe the limitations of the initial public crawl, not the current project data.
+
 ## Executive findings
 
 - The live sitemap exposes 55 URLs, including 6 articles, 23 tag/category archives, core pages, duplicate template pages, funnel/template remnants, and utility pages.
@@ -57,7 +59,7 @@ Accessed: 2026-08-02. Scope: publicly reachable pages in the live Squarespace si
 ## Owner-review flags
 
 - All service names and availability, especially Horary, Transit, Further Out in the Sky, relocation/astrocartography, Gift, and Solar Return.
-- Every price, duration, format, deliverable, intake requirement, and policy.
+- Remaining meeting formats, deliverables, intake requirements, and policies.
 - Credential and membership status as of launch.
 - Any testimonial and its publication permission.
 - Rights and original files for photographs.

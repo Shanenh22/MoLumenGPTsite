@@ -2,11 +2,11 @@
 
 ## Blocking service and booking questions
 
-1. Which services are currently available? Please explicitly confirm or reject: Natal, Solar Return, Life Changes, Relationship, relocation/location, Transit, Horary, Further Out in the Sky, and Gift.
-2. For each approved service, what are the current USD price, duration, format, prerequisites, required birth data, inclusions, deliverables, preparation, and availability?
-3. Are recording and printed-chart deliverables claimed in Mo1 accurate for every session?
-4. What are the cancellation, rescheduling, lateness, refund, no-show, and international-booking policies?
-5. Is there an existing Cal.com and Stripe account, or should staging use new configuration? What should happen to the current Acuity account?
+1. Are recording, chart, or other deliverables included with any of the nine confirmed services?
+2. What are the exact meeting-format choices for each service beyond the confirmed monthly Zoom consultation?
+3. What are the cancellation, rescheduling, lateness, refund, no-show, and international-booking policies?
+4. Is there an existing Cal.com and Stripe account, or should staging use new configuration? What should happen to the current Acuity account?
+5. What Cal.com event identifier should map to each confirmed service?
 
 ## Biography and trust
 

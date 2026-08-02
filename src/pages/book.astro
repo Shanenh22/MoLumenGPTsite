@@ -8,7 +8,7 @@ import { services } from '../data/services';
   ><PageHero
     eyebrow="Booking"
     title="Review everything before you choose a time."
-    lede="This staging page will connect to Cal.com with Stripe after Mo confirms services, prices, policies, and event settings."
+    lede="Choose a service, review its eligibility, duration, and price, then continue to scheduling when the booking connection is activated."
   /><section class="section">
     <div class="container booking-layout">
       <div>
@@ -27,9 +27,11 @@ import { services } from '../data/services';
           }
         </div>
       </div><aside class="card">
-        <p class="eyebrow">Integration not yet active</p><h2>No payment will be taken.</h2><p>
-          The current public source does not provide verified prices or policies. The booking embed
-          remains disabled until owner approval.
+        <p class="eyebrow">Integration not yet active</p><h2>
+          No payment will be taken on this staging page.
+        </h2><p>
+          Services and prices are now confirmed. Scheduling and payment remain disabled until the
+          Cal.com event links and booking policies are connected and tested.
         </p><a class="button secondary" href="/contact/">Ask Mo a question</a>
       </aside>
     </div>

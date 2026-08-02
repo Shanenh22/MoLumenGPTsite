@@ -6,26 +6,40 @@ export function getStaticPaths() {
   return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
 }
 const { service } = Astro.props as { service: Service };
+const serviceUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.name,
+  description: service.purpose,
+  url: serviceUrl.href,
+  provider: { '@type': 'Organization', name: 'Mo Lumen Astrology' },
+  offers: {
+    '@type': 'Offer',
+    price: service.priceAmount,
+    priceCurrency: service.currency,
+    availability: 'https://schema.org/InStock',
+    url: new URL(`/book/?service=${service.slug}`, serviceUrl.origin).href,
+  },
+};
 ---
 
 <BaseLayout title={service.shortName} description={service.purpose}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <PageHero eyebrow="Astrology reading" title={service.shortName} lede={service.purpose} />
   <section class="section">
     <div class="container grid detail-grid">
       <article class="prose">
+        <p class="lede">{service.description}</p>
         <h2>Who this reading may help</h2><ul>
           {service.bestFor.map((item) => <li>{item}</li>)}
-        </ul><h2>What happens</h2><p>
-          Mo prepares the relevant charts before you meet, then connects their themes to the real
-          situations and questions you bring. The conversation is exploratory and practical:
-          astrology offers perspective, while your decisions remain your own.
-        </p><h2>What Mo needs</h2><p>
+        </ul><h2>Eligibility</h2><p>{service.eligibility}</p><h2>What Mo needs</h2><p>
           {service.birthInfo}. Birth details are sensitive personal information. They should be
           submitted only through the approved booking provider—not by analytics, URLs, or this
           website’s storage.
         </p><h2>Before you book</h2><p>
-          Final inclusions, deliverables, cancellation terms, and rescheduling terms require owner
-          approval. They will be shown here before staging is approved for public bookings.
+          Review the final booking, cancellation, and rescheduling terms presented with the
+          appointment before payment.
         </p>
       </article><aside class="booking-card">
         <p class="eyebrow">At a glance</p><dl>
@@ -35,7 +49,8 @@ const { service } = Astro.props as { service: Service };
             <dt>Method</dt><dd>{service.method}</dd>
           </div>
         </dl><a class="button" href={`/book/?service=${service.slug}`}>Review booking details</a><a
-          href="/reading-finder/">Not sure? Use the Reading Finder</a>
+          href="/reading-finder/">Not sure? Use the Reading Finder</a
+        >
       </aside>
     </div>
   </section>

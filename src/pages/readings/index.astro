@@ -11,14 +11,11 @@ import { services } from '../../data/services';
   <PageHero
     eyebrow="Readings"
     title="Begin with your question, not the terminology."
-    lede="Each consultation offers a different angle. Prices and remaining operational details are being confirmed before staging approval."
+    lede="Each consultation offers a different angle. Compare the purpose, eligibility, duration, and price before choosing."
   />
   <section class="section">
     <div class="container">
-      <div class="notice">
-        <strong>Staging transparency:</strong> Current public source material does not contain prices.
-        No booking action will claim a price until Mo confirms it.
-      </div><div class="service-list">
+      <div class="service-list">
         {
           services.map((service) => (
             <article class="service-row">
@@ -52,6 +49,10 @@ import { services } from '../../data/services';
                         <dd>{service.birthInfo}</dd>
                       </>
                     </div>
+                    <div>
+                      <dt>Who can book</dt>
+                      <dd>{service.eligibility}</dd>
+                    </div>
                   </>
                 </dl>
                 <a class="button secondary" href={`/readings/${service.slug}/`}>
@@ -74,7 +75,8 @@ import { services } from '../../data/services';
       </div><div class="button-row">
         <a class="button" href="/reading-finder/">Find My Reading</a><a
           class="button secondary"
-          href="/how-readings-work/">How readings work</a>
+          href="/how-readings-work/">How readings work</a
+        >
       </div>
     </div>
   </section>

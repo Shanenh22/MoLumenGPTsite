@@ -2,7 +2,7 @@
 
 ## Before staging can accept bookings
 
-- Approve the canonical service inventory, price, duration, format, birth requirements, inclusions, deliverables, and availability.
+- Confirm meeting formats, birth requirements, inclusions, deliverables, and Cal.com event mappings for the nine approved services. Names, durations, eligibility, and prices were supplied by the owner on 2026-08-02.
 - Approve cancellation, rescheduling, refund, lateness, no-show, privacy, terms, disclaimer, and cookie language with a qualified professional.
 - Reconfirm credentials and memberships.
 - Supply original portrait files and usage rights.

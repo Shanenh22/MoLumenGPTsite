@@ -16,7 +16,8 @@ import { services } from '../data/services';
         <div class="button-row">
           <a class="button" href="/reading-finder/">Find Your Reading</a><a
             class="button secondary"
-            href="/about/">Meet Mo</a>
+            href="/about/">Meet Mo</a
+          >
         </div>
         <p class="reassurance">
           Warm, private conversations · Beginners welcome · Your choices remain your own
@@ -73,21 +74,24 @@ import { services } from '../data/services';
       </p>
       <div class="grid grid-2 service-grid">
         {
-          services.map((service, index) => (
-            <article class="service-card card">
-              <>
-                <span class="number">0{index + 1}</span>
-                <h3>
-                  <a href={`/readings/${service.slug}/`}>{service.shortName}</a>
-                </h3>
-                <p>{service.purpose}</p>
-                <p class="service-meta">{service.duration}</p>
-                <a href={`/readings/${service.slug}/`}>
-                  Explore this reading <span aria-hidden="true">→</span>
-                </a>
-              </>
-            </article>
-          ))
+          services
+            .filter((service) => service.featured)
+            .slice(0, 4)
+            .map((service, index) => (
+              <article class="service-card card">
+                <>
+                  <span class="number">0{index + 1}</span>
+                  <h3>
+                    <a href={`/readings/${service.slug}/`}>{service.shortName}</a>
+                  </h3>
+                  <p>{service.purpose}</p>
+                  <p class="service-meta">{service.duration}</p>
+                  <a href={`/readings/${service.slug}/`}>
+                    Explore this reading <span aria-hidden="true">→</span>
+                  </a>
+                </>
+              </article>
+            ))
         }
       </div><div class="button-row">
         <a class="button secondary" href="/readings/">Compare all readings</a>
@@ -158,7 +162,8 @@ import { services } from '../data/services';
         ><a class="card" href="/explore/"
           ><span aria-hidden="true">✦</span><h3>Astrology Library</h3><p>
             Build a grounded foundation, one clear concept at a time.
-          </p></a>
+          </p></a
+        >
       </div>
     </div>
   </section>
@@ -170,7 +175,8 @@ import { services } from '../data/services';
       </h2><div class="button-row">
         <a class="button" href="/reading-finder/">Find Your Reading</a><a
           class="button secondary"
-          href="/contact/">Ask Mo a question</a>
+          href="/contact/">Ask Mo a question</a
+        >
       </div>
     </div>
   </section>
