@@ -1,5 +1,9 @@
 ---
 import { navigation } from '../data/site';
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/' ? currentPath === href : currentPath === href || currentPath.startsWith(href);
 ---
 
 <header class="site-header">
@@ -9,8 +13,10 @@ import { navigation } from '../data/site';
       <span><strong>Mo Lumen</strong><small>Astrology</small></span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
-      <a class="button" href="/book/">Book a Reading</a>
+      {navigation.map((item) => (
+        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+      <a class="button" href="/book/" aria-current={isCurrent('/book/') ? 'page' : undefined}>Book a Reading</a>
     </nav>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">
       <span>Menu</span><span class="menu-lines" aria-hidden="true"></span>
@@ -23,11 +29,18 @@ import { navigation } from '../data/site';
         <button class="close-button" type="button">Close <span aria-hidden="true">×</span></button>
       </div>
       <nav aria-label="Mobile navigation">
-        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
-        <a href="/reading-finder/">Find Your Reading</a>
-        <a href="/contact/">Contact</a>
+        {navigation.map((item, index) => (
+          <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            <span class="nav-number">0{index + 1}</span><span>{item.label}</span><span aria-hidden="true">↗</span>
+          </a>
+        ))}
+        <a href="/reading-finder/" aria-current={isCurrent('/reading-finder/') ? 'page' : undefined}><span class="nav-number">06</span><span>Find Your Reading</span><span aria-hidden="true">↗</span></a>
+        <a href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}><span class="nav-number">07</span><span>Contact</span><span aria-hidden="true">↗</span></a>
       </nav>
-      <a class="button light" href="/book/">Book a Reading</a>
+      <div class="mobile-menu-footer">
+        <p><span aria-hidden="true">✦</span> Perspective for real life</p>
+        <a class="button light" href="/book/" aria-current={isCurrent('/book/') ? 'page' : undefined}>Book a Reading</a>
+      </div>
     </div>
   </div>
 </header>
@@ -57,6 +70,15 @@ import { navigation } from '../data/site';
   };
   button?.addEventListener('click', openMenu);
   close?.addEventListener('click', closeMenu);
+  menu?.addEventListener('click', (event) => {
+    const target = event.target as Element;
+    if (!target.closest('a, button')) closeMenu();
+  });
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  const desktopQuery = window.matchMedia('(min-width: 1121px)');
+  desktopQuery.addEventListener('change', (event) => {
+    if (event.matches && menu && !menu.hidden) closeMenu();
+  });
   document.addEventListener('keydown', (event) => {
     if (menu?.hidden) return;
     if (event.key === 'Escape') closeMenu();
@@ -81,8 +103,8 @@ import { navigation } from '../data/site';
     position: sticky;
     z-index: 50;
     top: 0;
-    border-bottom: 1px solid rgba(207, 196, 183, 0.8);
-    background: rgba(247, 241, 231, 0.96);
+    border-bottom: 1px solid rgba(216, 195, 154, 0.35);
+    background: rgba(15, 31, 53, 0.97);
     backdrop-filter: blur(14px);
   }
   .header-inner {
@@ -99,7 +121,7 @@ import { navigation } from '../data/site';
     text-decoration: none;
   }
   .brand:hover {
-    color: var(--navy);
+    color: var(--gold-light);
   }
   .brand-mark {
     display: grid;
@@ -119,10 +141,11 @@ import { navigation } from '../data/site';
     font-family: var(--serif);
     font-size: 1.2rem;
     font-weight: 400;
+    color: var(--white);
   }
   .brand small {
     margin-top: 0.2rem;
-    color: var(--brown);
+    color: var(--gold-light);
     font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -132,13 +155,22 @@ import { navigation } from '../data/site';
     align-items: center;
     gap: clamp(0.7rem, 2vw, 1.6rem);
     font-size: 0.9rem;
+    color: var(--ivory);
   }
   .desktop-nav > a:not(.button) {
     text-decoration: none;
   }
+  .desktop-nav > a[aria-current='page']:not(.button) {
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.45em;
+  }
   .desktop-nav .button {
     min-height: 2.7rem;
     padding-inline: 1rem;
+    border-color: var(--coral);
+    background: var(--coral);
   }
   .menu-button {
     display: none;
@@ -149,6 +181,7 @@ import { navigation } from '../data/site';
     border: 0;
     background: transparent;
     font-weight: 700;
+    color: var(--white);
   }
   .menu-lines,
   .menu-lines::before,
@@ -156,7 +189,7 @@ import { navigation } from '../data/site';
     display: block;
     width: 1.35rem;
     height: 1px;
-    background: var(--navy);
+    background: var(--gold-light);
     content: '';
   }
   .menu-lines {
@@ -174,7 +207,8 @@ import { navigation } from '../data/site';
     position: fixed;
     z-index: 100;
     inset: 0;
-    background: rgba(23, 36, 58, 0.35);
+    background: rgba(8, 18, 34, 0.72);
+    backdrop-filter: blur(8px);
   }
   .mobile-menu-inner {
     display: flex;
@@ -184,7 +218,9 @@ import { navigation } from '../data/site';
     flex-direction: column;
     padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right))
       max(1.25rem, env(safe-area-inset-bottom)) 1.25rem;
-    background: var(--navy);
+    background:
+      linear-gradient(180deg, rgba(15, 31, 53, 0.92), rgba(15, 31, 53, 0.99)),
+      url('/images/dusk-mountains.jpg') center / cover;
     color: var(--ivory);
     box-shadow: var(--shadow);
   }
@@ -209,19 +245,52 @@ import { navigation } from '../data/site';
   }
   .mobile-menu nav {
     display: grid;
-    margin-block: 3rem;
+    margin-block: 2rem;
   }
   .mobile-menu nav a {
-    padding-block: 0.85rem;
+    display: grid;
+    grid-template-columns: 2.25rem 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block: 0.72rem;
     border-bottom: 1px solid rgba(247, 241, 231, 0.2);
     font-family: var(--serif);
-    font-size: 1.6rem;
+    font-size: clamp(1.25rem, 5vw, 1.65rem);
     text-decoration: none;
   }
-  .mobile-menu .button {
-    margin-top: auto;
+  .mobile-menu nav a[aria-current='page'] {
+    color: var(--gold-light);
   }
-  @media (max-width: 980px) {
+  .nav-number {
+    display: grid;
+    width: 1.9rem;
+    height: 1.9rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--coral);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+  .mobile-menu nav a:nth-child(3n + 2) .nav-number { background: var(--cobalt); }
+  .mobile-menu nav a:nth-child(3n) .nav-number { background: var(--saffron); color: var(--navy); }
+  .mobile-menu-footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(247, 241, 231, 0.2);
+  }
+  .mobile-menu-footer p { margin: 0; color: var(--gold-light); font-size: 0.75rem; }
+  .mobile-menu-footer .button { min-height: 2.7rem; font-size: 0.82rem; }
+  @media (max-width: 420px) {
+    .mobile-menu-footer { grid-template-columns: 1fr; }
+    .mobile-menu-footer p { display: none; }
+  }
+  @media (max-width: 1120px) {
     .desktop-nav {
       display: none;
     }

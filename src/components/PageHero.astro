@@ -5,12 +5,24 @@ interface Props {
   lede?: string;
 }
 const { eyebrow, title, lede } = Astro.props;
+const path = Astro.url.pathname;
+const visual = path.startsWith('/readings') || path.startsWith('/book') || path.startsWith('/reading-finder')
+  ? { src: '/images/chart-detail.jpg', alt: 'An astrological chart, brass dividers, and a cobalt glass paperweight in warm sunlight', mark: '◎' }
+  : path.startsWith('/current-sky') || path.startsWith('/explore') || path.startsWith('/articles') || path.startsWith('/tools')
+    ? { src: '/images/dusk-mountains.jpg', alt: 'A crescent moon above blue mountains and sunset-lit wildflowers', mark: '☽' }
+    : { src: '/images/hero-workspace.jpg', alt: 'A warmly lit astrology workspace with a starry cup, notebook, and chart', mark: '✦' };
 ---
 
 <section class="page-hero">
-  <div class="container">
-    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    <h1>{title}</h1>
-    {lede && <p class="lede">{lede}</p>}
+  <div class="container page-hero-grid">
+    <div class="page-hero-copy">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {lede && <p class="lede">{lede}</p>}
+    </div>
+    <figure class="page-hero-visual">
+      <img src={visual.src} alt={visual.alt} width="1536" height="1024" />
+      <span aria-hidden="true">{visual.mark}</span>
+    </figure>
   </div>
 </section>

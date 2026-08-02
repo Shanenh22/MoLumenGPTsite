@@ -23,11 +23,9 @@ import { services } from '../data/services';
           Warm, private conversations · Beginners welcome · Your choices remain your own
         </p>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="sun">
-          ✦
-        </div>
-        <p>practical <span>·</span> candid <span>·</span> compassionate</p>
+      <div class="hero-art">
+        <p class="hero-note"><span aria-hidden="true">☽</span><strong>Astrology is a map.</strong><small>You choose the path.</small></p>
+        <div class="hero-tags" aria-label="Mo's approach"><span>Practical</span><span>Candid</span><span>Compassionate</span></div>
       </div>
     </div>
   </section>
@@ -184,17 +182,18 @@ import { services } from '../data/services';
 
 <style>
   .home-hero {
-    min-height: 42rem;
+    min-height: clamp(42rem, 82vh, 52rem);
     display: grid;
     align-items: center;
     overflow: hidden;
     background:
-      radial-gradient(circle at 75% 30%, rgba(169, 133, 71, 0.2), transparent 26%),
-      linear-gradient(135deg, var(--paper-light), var(--ivory));
+      linear-gradient(90deg, rgba(9, 22, 40, 0.98) 0%, rgba(9, 22, 40, 0.88) 41%, rgba(9, 22, 40, 0.15) 72%, rgba(9, 22, 40, 0.08) 100%),
+      url('/images/hero-workspace.jpg') center / cover;
+    color: var(--white);
   }
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
     align-items: center;
     gap: var(--space-6);
     padding-block: var(--space-7);
@@ -203,55 +202,43 @@ import { services } from '../data/services';
     max-width: 11ch;
   }
   h1 em {
-    color: var(--clay);
+    color: #ffb08f;
     font-weight: 400;
   }
   .reassurance {
     margin-top: var(--space-4);
-    color: var(--brown);
+    color: rgba(255, 253, 248, 0.72);
     font-size: var(--step--1);
   }
   .hero-art {
     position: relative;
-    min-height: 30rem;
-    border-radius: 50% 50% 45% 55%;
-    background: var(--navy);
-    box-shadow: var(--shadow);
-    color: var(--ivory);
+    min-height: 28rem;
   }
-  .hero-art .sun {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 4rem;
-    color: var(--gold-light);
-    transform: translate(-50%, -50%);
-  }
-  .orbit {
-    position: absolute;
-    inset: 12%;
-    border: 1px solid rgba(247, 241, 231, 0.35);
-    border-radius: 50%;
-    transform: rotate(22deg);
-  }
-  .orbit-two {
-    inset: 25% 8%;
-    transform: rotate(-32deg);
-  }
-  .hero-art p {
+  .hero-note {
     position: absolute;
     right: 0;
-    bottom: 1.5rem;
-    left: 0;
+    bottom: 1rem;
+    width: min(100%, 20rem);
     margin: 0;
-    text-align: center;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,.32);
+    border-radius: 1.25rem;
+    background: rgba(255, 253, 248, 0.92);
+    box-shadow: var(--shadow-color);
+    color: var(--navy);
+    backdrop-filter: blur(14px);
   }
-  .hero-art p span {
-    color: var(--gold-light);
-  }
+  .hero-note > span { display: block; color: var(--coral); font-size: 2.5rem; }
+  .hero-note strong { display: block; font-family: var(--serif); font-size: 1.55rem; font-weight: 400; }
+  .hero-note small { color: var(--brown); letter-spacing: .08em; text-transform: uppercase; }
+  .hero-tags { position: absolute; top: 1rem; right: 0; display: flex; max-width: 19rem; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
+  .hero-tags span { padding: .45rem .8rem; border-radius: 999px; background: var(--cobalt); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .hero-tags span:nth-child(2) { background: var(--coral); }
+  .hero-tags span:nth-child(3) { background: var(--saffron); color: var(--navy); }
+  .home-hero .eyebrow { color: var(--gold-light); }
+  .home-hero .button { background: var(--coral); border-color: var(--coral); }
+  .home-hero .button.secondary { border-color: rgba(255,255,255,.65); background: rgba(15,31,53,.24); color: var(--white); }
+  .home-hero .lede { color: rgba(255,253,248,.84); }
   .recognition-list p {
     padding: 0 0 1rem 1.25rem;
     border-left: 1px solid var(--gold);
@@ -263,7 +250,7 @@ import { services } from '../data/services';
     gap: var(--space-6);
     padding: clamp(2rem, 5vw, 4rem);
     border-radius: var(--radius-lg);
-    background: var(--clay);
+    background: radial-gradient(circle at 88% 15%, rgba(255,255,255,.18), transparent 14rem), linear-gradient(135deg, var(--coral), #b94f6c 54%, var(--cobalt));
     color: var(--white);
     box-shadow: var(--shadow);
   }
@@ -277,6 +264,10 @@ import { services } from '../data/services';
     position: relative;
     padding-left: clamp(4rem, 7vw, 6rem);
   }
+  .service-card:nth-child(4n + 1) { border-top: .35rem solid var(--coral); }
+  .service-card:nth-child(4n + 2) { border-top: .35rem solid var(--cobalt); }
+  .service-card:nth-child(4n + 3) { border-top: .35rem solid var(--saffron); }
+  .service-card:nth-child(4n) { border-top: .35rem solid var(--sage); }
   .number {
     position: absolute;
     top: 1.6rem;
@@ -302,7 +293,7 @@ import { services } from '../data/services';
     place-content: center;
     border: 1px solid var(--stone);
     border-radius: 48% 48% var(--radius-lg) var(--radius-lg);
-    background: linear-gradient(155deg, var(--blush), var(--paper));
+    background: linear-gradient(135deg, rgba(15,31,53,.18), rgba(215,101,77,.18)), url('/images/chart-detail.jpg') center / cover;
     color: var(--brown);
     text-align: center;
   }
@@ -310,6 +301,7 @@ import { services } from '../data/services';
     color: var(--gold);
     font-size: 4rem;
   }
+  .portrait-placeholder p { padding: .6rem 1rem; border-radius: 999px; background: rgba(255,253,248,.9); }
   .process .eyebrow {
     color: var(--gold-light);
   }
@@ -352,6 +344,9 @@ import { services } from '../data/services';
     color: var(--gold);
     font-size: 2.4rem;
   }
+  .pathway-grid a:nth-child(1) span { color: var(--cobalt); }
+  .pathway-grid a:nth-child(2) span { color: var(--coral); }
+  .pathway-grid a:nth-child(3) span { color: var(--saffron); }
   @media (max-width: 800px) {
     .home-hero {
       min-height: auto;
@@ -360,7 +355,7 @@ import { services } from '../data/services';
       grid-template-columns: 1fr;
     }
     .hero-art {
-      min-height: 20rem;
+      min-height: 13rem;
     }
     .finder-card {
       grid-template-columns: 1fr;
