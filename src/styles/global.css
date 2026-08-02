@@ -286,6 +286,7 @@ p {
   box-shadow: var(--shadow-color);
   object-fit: cover;
 }
+.page-hero-visual.portrait img { object-position: center 30%; }
 .page-hero-visual span {
   position: absolute;
   right: -1.25rem;
@@ -361,8 +362,8 @@ p {
 }
 .visual-coda-image,
 .visual-coda-detail { min-height: 24rem; background-position: center; background-size: cover; }
-.visual-coda-image { background-image: url('/images/dusk-mountains.jpg'); }
-.visual-coda-detail { background-image: url('/images/chart-detail.jpg'); }
+.visual-coda-image { background-image: url('/images/dusk-mountains.webp'); }
+.visual-coda-detail { background-image: url('/images/chart-detail.webp'); }
 .visual-coda-note {
   display: grid;
   align-content: center;

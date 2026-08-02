@@ -24,19 +24,19 @@ const visualLibrary = [
   ['/explore/relationships', 'relationship-reading', 'Two colorful cups beside overlapping relationship charts', '♡'],
   ['/how-readings-work', 'reading-process', 'A sequence of objects representing the reading process', '01'],
   ['/prepare-for-your-reading', 'prepare-reading', 'A calm desk prepared with a notebook, chart, water, and clock', '✓'],
-  ['/about', 'about-mo-placeholder', 'An inviting empty reading chair beside a navy table and notebook', '✦'],
-  ['/approach', 'approach-philosophy', 'A compass and hand-drawn path beside a natal chart', '↗'],
+  ['/about', 'mo-3', 'Mo Lumen smiling in a vibrant red sweater', '✦', 'portrait'],
+  ['/approach', 'mo-4', 'Mo Lumen smiling in a navy jacket', '↗', 'portrait'],
   ['/videos', 'videos-studio', 'A warm recording studio with microphone, headphones, and astrology books', '▶'],
   ['/newsletter', 'newsletter-letters', 'Cream stationery, fountain pen, coral ribbon, and brass star', '✉'],
 ] as const;
 const match = visualLibrary.find(([prefix]) => path.startsWith(prefix));
 const visual = match
-  ? { src: `/images/${match[1]}.jpg`, alt: match[2], mark: match[3] }
+  ? { src: `/images/${match[1]}.webp`, alt: match[2], mark: match[3], kind: match[4] ?? '' }
   : path.startsWith('/explore') || path.startsWith('/articles') || path.startsWith('/tools')
-    ? { src: '/images/birth-chart-basics.jpg', alt: 'Tactile objects representing the building blocks of a birth chart', mark: '◎' }
+    ? { src: '/images/birth-chart-basics.webp', alt: 'Tactile objects representing the building blocks of a birth chart', mark: '◎', kind: '' }
     : path.startsWith('/readings') || path.startsWith('/book') || path.startsWith('/reading-finder')
-      ? { src: '/images/natal-reading.jpg', alt: 'A natal chart, navy notebook, coral ribbon, and brass pen in warm sunlight', mark: '◎' }
-      : { src: '/images/hero-workspace.jpg', alt: 'A warmly lit astrology workspace with a starry cup, notebook, and chart', mark: '✦' };
+      ? { src: '/images/natal-reading.webp', alt: 'A natal chart, navy notebook, coral ribbon, and brass pen in warm sunlight', mark: '◎', kind: '' }
+      : { src: '/images/hero-workspace.webp', alt: 'A warmly lit astrology workspace with a starry cup, notebook, and chart', mark: '✦', kind: '' };
 ---
 
 <section class="page-hero">
@@ -46,8 +46,8 @@ const visual = match
       <h1>{title}</h1>
       {lede && <p class="lede">{lede}</p>}
     </div>
-    <figure class="page-hero-visual">
-      <img src={visual.src} alt={visual.alt} width="1536" height="1024" />
+    <figure class:list={['page-hero-visual', visual.kind]}>
+      <img src={visual.src} alt={visual.alt} width="1536" height="1024" decoding="async" fetchpriority="high" />
       <span aria-hidden="true">{visual.mark}</span>
     </figure>
   </div>

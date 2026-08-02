@@ -18,14 +18,17 @@ const isCurrent = (href: string) =>
       ))}
       <a class="button" href="/book/" aria-current={isCurrent('/book/') ? 'page' : undefined}>Book a Reading</a>
     </nav>
-    <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">
-      <span>Menu</span><span class="menu-lines" aria-hidden="true"></span>
-    </button>
+    <div class="mobile-actions">
+      <a class="mobile-book" href="/book/">Book</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <span>Menu</span><span class="menu-lines" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="mobile-menu-inner" role="dialog" aria-modal="true" aria-label="Site menu">
       <div class="mobile-menu-top">
-        <span class="eyebrow">Explore Mo Lumen</span>
+        <div><span class="eyebrow">Explore Mo Lumen</span><p>Where would you like to go?</p></div>
         <button class="close-button" type="button">Close <span aria-hidden="true">×</span></button>
       </div>
       <nav aria-label="Mobile navigation">
@@ -38,7 +41,7 @@ const isCurrent = (href: string) =>
         <a href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}><span class="nav-number">07</span><span>Contact</span><span aria-hidden="true">↗</span></a>
       </nav>
       <div class="mobile-menu-footer">
-        <p><span aria-hidden="true">✦</span> Perspective for real life</p>
+        <div class="menu-mo"><img src="/images/mo-5.webp" alt="" width="64" height="64" loading="lazy" /><p><span aria-hidden="true">✦</span> Perspective for real life</p></div>
         <a class="button light" href="/book/" aria-current={isCurrent('/book/') ? 'page' : undefined}>Book a Reading</a>
       </div>
     </div>
@@ -183,6 +186,8 @@ const isCurrent = (href: string) =>
     font-weight: 700;
     color: var(--white);
   }
+  .mobile-actions { display: none; align-items: center; gap: .25rem; }
+  .mobile-book { padding: .7rem .85rem; border-radius: 999px; background: var(--coral); color: var(--white); font-size: .78rem; font-weight: 800; text-decoration: none; }
   .menu-lines,
   .menu-lines::before,
   .menu-lines::after {
@@ -220,7 +225,7 @@ const isCurrent = (href: string) =>
       max(1.25rem, env(safe-area-inset-bottom)) 1.25rem;
     background:
       linear-gradient(180deg, rgba(15, 31, 53, 0.92), rgba(15, 31, 53, 0.99)),
-      url('/images/dusk-mountains.jpg') center / cover;
+      url('/images/dusk-mountains.webp') center / cover;
     color: var(--ivory);
     box-shadow: var(--shadow);
   }
@@ -233,6 +238,7 @@ const isCurrent = (href: string) =>
     margin: 0;
     color: var(--gold-light);
   }
+  .mobile-menu-top p { margin: .25rem 0 0; color: rgba(255,253,248,.72); font-size: .82rem; }
   .close-button {
     min-width: 3rem;
     min-height: 3rem;
@@ -285,6 +291,8 @@ const isCurrent = (href: string) =>
     border-top: 1px solid rgba(247, 241, 231, 0.2);
   }
   .mobile-menu-footer p { margin: 0; color: var(--gold-light); font-size: 0.75rem; }
+  .menu-mo { display: flex; align-items: center; gap: .75rem; }
+  .menu-mo img { width: 2.75rem; height: 2.75rem; border: 2px solid var(--gold-light); border-radius: 50%; object-fit: cover; object-position: center 30%; }
   .mobile-menu-footer .button { min-height: 2.7rem; font-size: 0.82rem; }
   @media (max-width: 420px) {
     .mobile-menu-footer { grid-template-columns: 1fr; }
@@ -297,5 +305,6 @@ const isCurrent = (href: string) =>
     .menu-button {
       display: flex;
     }
+    .mobile-actions { display: flex; }
   }
 </style>
