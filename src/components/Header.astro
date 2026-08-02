@@ -9,7 +9,8 @@ const isCurrent = (href: string) =>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="Mo Lumen Astrology, home">
-      <img src="/images/mo-lumen-logo.png" alt="" width="316" height="193" decoding="async" />
+      <img class="brand-icon" src="/images/brand-mark.png" alt="" width="256" height="256" decoding="async" />
+      <span class="brand-copy"><strong>Mo Lumen</strong><small>Astrology</small></span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       {navigation.map((item) => (
@@ -117,14 +118,18 @@ const isCurrent = (href: string) =>
     gap: 1rem;
   }
   .brand {
-    display: block;
-    width: clamp(11.5rem, 16vw, 14.5rem);
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
     text-decoration: none;
   }
   .brand:hover {
     color: var(--gold-light);
   }
-  .brand img { display: block; width: 100%; height: auto; max-height: 3.8rem; object-fit: contain; object-position: left center; }
+  .brand-icon { width: 3.15rem; height: 3.15rem; flex: 0 0 auto; }
+  .brand-copy strong, .brand-copy small { display: block; line-height: 1; }
+  .brand-copy strong { color: var(--white); font-family: var(--serif); font-size: 1.35rem; font-weight: 600; letter-spacing: .015em; }
+  .brand-copy small { margin-top: .35rem; color: var(--gold-light); font-size: .65rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
   .desktop-nav {
     display: flex;
     align-items: center;
@@ -278,10 +283,14 @@ const isCurrent = (href: string) =>
       display: flex;
     }
     .mobile-actions { display: flex; }
-    .brand { width: 9.5rem; }
+    .brand-icon { width: 2.8rem; height: 2.8rem; }
+    .brand-copy strong { font-size: 1.15rem; }
   }
   @media (max-width: 390px) {
-    .brand { width: 8.5rem; }
+    .brand { gap: .5rem; }
+    .brand-icon { width: 2.55rem; height: 2.55rem; }
+    .brand-copy strong { font-size: 1.05rem; }
+    .brand-copy small { font-size: .55rem; letter-spacing: .15em; }
     .mobile-book { padding-inline: .7rem; }
     .menu-button { gap: .4rem; padding-inline: .35rem; }
   }
