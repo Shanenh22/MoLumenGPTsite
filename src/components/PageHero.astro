@@ -6,11 +6,37 @@ interface Props {
 }
 const { eyebrow, title, lede } = Astro.props;
 const path = Astro.url.pathname;
-const visual = path.startsWith('/readings') || path.startsWith('/book') || path.startsWith('/reading-finder')
-  ? { src: '/images/chart-detail.jpg', alt: 'An astrological chart, brass dividers, and a cobalt glass paperweight in warm sunlight', mark: '◎' }
-  : path.startsWith('/current-sky') || path.startsWith('/explore') || path.startsWith('/articles') || path.startsWith('/tools')
-    ? { src: '/images/dusk-mountains.jpg', alt: 'A crescent moon above blue mountains and sunset-lit wildflowers', mark: '☽' }
-    : { src: '/images/hero-workspace.jpg', alt: 'A warmly lit astrology workspace with a starry cup, notebook, and chart', mark: '✦' };
+const visualLibrary = [
+  ['/readings/new-client-natal-chart-reading', 'natal-reading', 'A natal chart, navy notebook, coral ribbon, and brass pen in warm sunlight', '◎'],
+  ['/readings/more-clarity', 'more-clarity', 'A magnifying glass revealing details within a natal chart', '◎'],
+  ['/readings/life-changes', 'life-changes', 'A mountain path dividing toward two colorful horizons', '↗'],
+  ['/readings/solar-return', 'solar-return', 'A brass sun mirror glowing above an astrology chart and coral journal', '☉'],
+  ['/readings/monthly-personal-transits', 'monthly-transits', 'Moon markers circling a navy journal in warm botanical light', '☽'],
+  ['/readings/relationship', 'relationship-reading', 'Two colorful cups beside overlapping relationship charts', '♡'],
+  ['/readings/quick-check-in', 'quick-check-in', 'A single brass compass centered in a beam of warm light', '✦'],
+  ['/current-sky', 'current-sky-wide', 'A crescent moon and bright stars over blue hills at sunset', '☽'],
+  ['/explore/planets', 'planets-library', 'A refined collection of colorful planetary spheres on brass stands', '☉'],
+  ['/explore/signs', 'signs-library', 'Cream symbolic medallions arranged on cobalt fabric', '✦'],
+  ['/explore/houses', 'houses-library', 'Twelve cream paper sections forming an astrological house wheel', '⌂'],
+  ['/explore/aspects', 'aspects-library', 'Colorful threads connecting brass points on navy velvet', '△'],
+  ['/explore/birth-chart-basics', 'birth-chart-basics', 'Four tactile objects representing the building blocks of a birth chart', '◎'],
+  ['/explore/transits', 'current-transits', 'A brass armillary sphere before a twilight crescent moon', '☽'],
+  ['/explore/relationships', 'relationship-reading', 'Two colorful cups beside overlapping relationship charts', '♡'],
+  ['/how-readings-work', 'reading-process', 'A sequence of objects representing the reading process', '01'],
+  ['/prepare-for-your-reading', 'prepare-reading', 'A calm desk prepared with a notebook, chart, water, and clock', '✓'],
+  ['/about', 'about-mo-placeholder', 'An inviting empty reading chair beside a navy table and notebook', '✦'],
+  ['/approach', 'approach-philosophy', 'A compass and hand-drawn path beside a natal chart', '↗'],
+  ['/videos', 'videos-studio', 'A warm recording studio with microphone, headphones, and astrology books', '▶'],
+  ['/newsletter', 'newsletter-letters', 'Cream stationery, fountain pen, coral ribbon, and brass star', '✉'],
+] as const;
+const match = visualLibrary.find(([prefix]) => path.startsWith(prefix));
+const visual = match
+  ? { src: `/images/${match[1]}.jpg`, alt: match[2], mark: match[3] }
+  : path.startsWith('/explore') || path.startsWith('/articles') || path.startsWith('/tools')
+    ? { src: '/images/birth-chart-basics.jpg', alt: 'Tactile objects representing the building blocks of a birth chart', mark: '◎' }
+    : path.startsWith('/readings') || path.startsWith('/book') || path.startsWith('/reading-finder')
+      ? { src: '/images/natal-reading.jpg', alt: 'A natal chart, navy notebook, coral ribbon, and brass pen in warm sunlight', mark: '◎' }
+      : { src: '/images/hero-workspace.jpg', alt: 'A warmly lit astrology workspace with a starry cup, notebook, and chart', mark: '✦' };
 ---
 
 <section class="page-hero">
