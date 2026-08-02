@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { services } from '../../data/services';
+---
+
+<BaseLayout
+  title="Astrology Readings"
+  description="Compare Mo Lumen Astrology's currently verified consultation types and find the one that fits your situation."
+>
+  <PageHero
+    eyebrow="Readings"
+    title="Begin with your question, not the terminology."
+    lede="Each consultation offers a different angle. Prices and remaining operational details are being confirmed before staging approval."
+  />
+  <section class="section">
+    <div class="container">
+      <div class="notice">
+        <strong>Staging transparency:</strong> Current public source material does not contain prices.
+        No booking action will claim a price until Mo confirms it.
+      </div><div class="service-list">
+        {
+          services.map((service) => (
+            <article class="service-row">
+              <>
+                <div>
+                  <>
+                    <p class="eyebrow">{service.method}</p>
+                    <h2>
+                      <a href={`/readings/${service.slug}/`}>{service.shortName}</a>
+                    </h2>
+                    <p>{service.purpose}</p>
+                  </>
+                </div>
+                <dl>
+                  <>
+                    <div>
+                      <>
+                        <dt>Duration</dt>
+                        <dd>{service.duration}</dd>
+                      </>
+                    </div>
+                    <div>
+                      <>
+                        <dt>Price</dt>
+                        <dd>{service.price}</dd>
+                      </>
+                    </div>
+                    <div>
+                      <>
+                        <dt>Birth information</dt>
+                        <dd>{service.birthInfo}</dd>
+                      </>
+                    </div>
+                  </>
+                </dl>
+                <a class="button secondary" href={`/readings/${service.slug}/`}>
+                  Full details
+                </a>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <section class="section surface">
+    <div class="container grid grid-2">
+      <div>
+        <p class="eyebrow">Need a hand choosing?</p><h2>Let your situation lead the way.</h2><p>
+          The Reading Finder asks a few simple questions and explains why a verified service may
+          fit.
+        </p>
+      </div><div class="button-row">
+        <a class="button" href="/reading-finder/">Find My Reading</a><a
+          class="button secondary"
+          href="/how-readings-work/">How readings work</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .service-list {
+    display: grid;
+    gap: 1px;
+    margin-top: var(--space-6);
+    background: var(--stone);
+  }
+  .service-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr auto;
+    align-items: center;
+    gap: var(--space-5);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: var(--paper-light);
+  }
+  .service-row h2 {
+    font-size: var(--step-2);
+  }
+  .service-row h2 a {
+    text-decoration: none;
+  }
+  .service-row dl {
+    margin: 0;
+  }
+  .service-row dl > div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--stone);
+  }
+  dt {
+    font-weight: 700;
+  }
+  dd {
+    margin: 0;
+    color: var(--brown);
+  }
+  @media (max-width: 850px) {
+    .service-row {
+      grid-template-columns: 1fr;
+    }
+    .service-row dl > div {
+      grid-template-columns: 1fr;
+    }
+    .service-row .button {
+      justify-self: start;
+    }
+  }
+</style>

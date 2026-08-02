@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { services, type Service } from '../../data/services';
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props as { service: Service };
+---
+
+<BaseLayout title={service.shortName} description={service.purpose}>
+  <PageHero eyebrow="Astrology reading" title={service.shortName} lede={service.purpose} />
+  <section class="section">
+    <div class="container grid detail-grid">
+      <article class="prose">
+        <h2>Who this reading may help</h2><ul>
+          {service.bestFor.map((item) => <li>{item}</li>)}
+        </ul><h2>What happens</h2><p>
+          Mo prepares the relevant charts before you meet, then connects their themes to the real
+          situations and questions you bring. The conversation is exploratory and practical:
+          astrology offers perspective, while your decisions remain your own.
+        </p><h2>What Mo needs</h2><p>
+          {service.birthInfo}. Birth details are sensitive personal information. They should be
+          submitted only through the approved booking provider—not by analytics, URLs, or this
+          website’s storage.
+        </p><h2>Before you book</h2><p>
+          Final inclusions, deliverables, cancellation terms, and rescheduling terms require owner
+          approval. They will be shown here before staging is approved for public bookings.
+        </p>
+      </article><aside class="booking-card">
+        <p class="eyebrow">At a glance</p><dl>
+          <div><dt>Duration</dt><dd>{service.duration}</dd></div><div>
+            <dt>Price</dt><dd>{service.price}</dd>
+          </div><div><dt>Format</dt><dd>{service.format}</dd></div><div>
+            <dt>Method</dt><dd>{service.method}</dd>
+          </div>
+        </dl><a class="button" href={`/book/?service=${service.slug}`}>Review booking details</a><a
+          href="/reading-finder/">Not sure? Use the Reading Finder</a>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .detail-grid {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+    gap: var(--space-7);
+  }
+  .booking-card {
+    position: sticky;
+    top: 7rem;
+    display: grid;
+    gap: 1rem;
+    padding: var(--space-5);
+    border: 1px solid var(--stone);
+    border-radius: var(--radius-md);
+    background: var(--paper-light);
+    box-shadow: var(--shadow);
+  }
+  .booking-card dl {
+    margin: 0;
+  }
+  .booking-card dl div {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--stone);
+  }
+  .booking-card dt {
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .booking-card dd {
+    margin: 0.2rem 0 0;
+    color: var(--brown);
+  }
+  @media (max-width: 800px) {
+    .detail-grid {
+      grid-template-columns: 1fr;
+    }
+    .booking-card {
+      position: static;
+    }
+  }
+</style>

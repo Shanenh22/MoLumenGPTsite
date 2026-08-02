@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { services } from '../data/services';
+---
+
+<BaseLayout>
+  <section class="home-hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Astrology readings for real life</p>
+        <h1>See yourself in a <em>new light.</em></h1>
+        <p class="lede">
+          Your chart is not a verdict. It is a way to notice patterns, understand the season you are
+          in, and make more conscious choices about what comes next.
+        </p>
+        <div class="button-row">
+          <a class="button" href="/reading-finder/">Find Your Reading</a><a
+            class="button secondary"
+            href="/about/">Meet Mo</a>
+        </div>
+        <p class="reassurance">
+          Warm, private conversations · Beginners welcome · Your choices remain your own
+        </p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="sun">
+          ✦
+        </div>
+        <p>practical <span>·</span> candid <span>·</span> compassionate</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section recognition surface">
+    <div class="container grid grid-2">
+      <div>
+        <p class="eyebrow">A thoughtful pause</p><h2>
+          You may be here because something is asking for your attention.
+        </h2>
+      </div>
+      <div class="recognition-list">
+        <p>Perhaps you are at a threshold and want perspective before choosing a direction.</p>
+        <p>
+          Perhaps a relationship keeps revealing the same pattern—and you are ready to understand it
+          differently.
+        </p>
+        <p>
+          Or perhaps you simply want language for the person you have always sensed yourself to be.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section finder-invite">
+    <div class="container finder-card">
+      <div>
+        <p class="eyebrow">Two minutes to clarity</p><h2>Not sure which reading fits?</h2><p>
+          Answer a few plain-language questions. The Reading Finder recommends only services Mo
+          currently offers—and you are always free to choose another.
+        </p>
+      </div>
+      <a class="button light" href="/reading-finder/">Start the Reading Finder</a>
+    </div>
+  </section>
+
+  <section class="section surface">
+    <div class="container">
+      <p class="eyebrow">Ways to work together</p><h2>Begin with what you want to understand.</h2><p
+        class="lede"
+      >
+        You do not need to know the astrological terminology. Start with your situation; Mo brings
+        the method.
+      </p>
+      <div class="grid grid-2 service-grid">
+        {
+          services.map((service, index) => (
+            <article class="service-card card">
+              <>
+                <span class="number">0{index + 1}</span>
+                <h3>
+                  <a href={`/readings/${service.slug}/`}>{service.shortName}</a>
+                </h3>
+                <p>{service.purpose}</p>
+                <p class="service-meta">{service.duration}</p>
+                <a href={`/readings/${service.slug}/`}>
+                  Explore this reading <span aria-hidden="true">→</span>
+                </a>
+              </>
+            </article>
+          ))
+        }
+      </div><div class="button-row">
+        <a class="button secondary" href="/readings/">Compare all readings</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-preview">
+    <div class="container grid grid-2">
+      <div
+        class="portrait-placeholder"
+        role="img"
+        aria-label="A quiet editorial frame reserved for an approved photograph of Mo"
+      >
+        <span>✦</span><p>Approved photograph of Mo</p>
+      </div>
+      <div>
+        <p class="eyebrow">Meet your astrologer</p><h2>
+          Classical technique. A teacher’s clarity. A very human conversation.
+        </h2><p>
+          Mo is an astrologer, teacher, and writer who connects the language of a chart to the life
+          you are actually living. Her approach is candid and compassionate, intuitive and
+          practical.
+        </p><blockquote>
+          “I will connect your reading directly to your real-life situations and stories—not just
+          flowery, feel-good platitudes.”
+        </blockquote><a class="button secondary" href="/about/">Meet Mo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy-surface process">
+    <div class="container">
+      <p class="eyebrow">How a reading works</p><h2>
+        A considered process, from question to conversation.
+      </h2><ol class="process-grid">
+        <li><span>1</span><h3>Choose</h3><p>Find the reading that fits your situation.</p></li><li>
+          <span>2</span><h3>Schedule</h3><p>
+            Review details, choose a time, and share only what is needed.
+          </p>
+        </li><li>
+          <span>3</span><h3>Prepare</h3><p>Mo studies your charts before the session.</p>
+        </li><li>
+          <span>4</span><h3>Meet</h3><p>Explore the patterns together, with room for questions.</p>
+        </li>
+      </ol><a class="button light" href="/how-readings-work/">See the full process</a>
+    </div>
+  </section>
+
+  <section class="section pathways">
+    <div class="container">
+      <div class="grid grid-2">
+        <div>
+          <p class="eyebrow">Learn at your own pace</p><h2>Astrology in plain language.</h2>
+        </div><p class="lede">
+          Understand the four building blocks of a chart—planets, signs, houses, and aspects—without
+          reducing a person to a list of traits.
+        </p>
+      </div><div class="grid grid-3 pathway-grid">
+        <a class="card" href="/tools/explore-your-chart/"
+          ><span aria-hidden="true">◎</span><h3>Explore Your Chart</h3><p>
+            An interactive, non-personalized guide to how a chart is organized.
+          </p></a
+        ><a class="card" href="/current-sky/"
+          ><span aria-hidden="true">☼</span><h3>Current Sky</h3><p>
+            Learn what is moving overhead and how Mo approaches its themes.
+          </p></a
+        ><a class="card" href="/explore/"
+          ><span aria-hidden="true">✦</span><h3>Astrology Library</h3><p>
+            Build a grounded foundation, one clear concept at a time.
+          </p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section final-cta surface">
+    <div class="container reading-width">
+      <p class="eyebrow">A calm next step</p><h2>
+        Your chart can offer perspective. What you do with it is yours.
+      </h2><div class="button-row">
+        <a class="button" href="/reading-finder/">Find Your Reading</a><a
+          class="button secondary"
+          href="/contact/">Ask Mo a question</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .home-hero {
+    min-height: 42rem;
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 75% 30%, rgba(169, 133, 71, 0.2), transparent 26%),
+      linear-gradient(135deg, var(--paper-light), var(--ivory));
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: var(--space-6);
+    padding-block: var(--space-7);
+  }
+  h1 {
+    max-width: 11ch;
+  }
+  h1 em {
+    color: var(--clay);
+    font-weight: 400;
+  }
+  .reassurance {
+    margin-top: var(--space-4);
+    color: var(--brown);
+    font-size: var(--step--1);
+  }
+  .hero-art {
+    position: relative;
+    min-height: 30rem;
+    border-radius: 50% 50% 45% 55%;
+    background: var(--navy);
+    box-shadow: var(--shadow);
+    color: var(--ivory);
+  }
+  .hero-art .sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 4rem;
+    color: var(--gold-light);
+    transform: translate(-50%, -50%);
+  }
+  .orbit {
+    position: absolute;
+    inset: 12%;
+    border: 1px solid rgba(247, 241, 231, 0.35);
+    border-radius: 50%;
+    transform: rotate(22deg);
+  }
+  .orbit-two {
+    inset: 25% 8%;
+    transform: rotate(-32deg);
+  }
+  .hero-art p {
+    position: absolute;
+    right: 0;
+    bottom: 1.5rem;
+    left: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .hero-art p span {
+    color: var(--gold-light);
+  }
+  .recognition-list p {
+    padding: 0 0 1rem 1.25rem;
+    border-left: 1px solid var(--gold);
+  }
+  .finder-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--space-6);
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: var(--radius-lg);
+    background: var(--clay);
+    color: var(--white);
+    box-shadow: var(--shadow);
+  }
+  .finder-card p {
+    max-width: 42rem;
+  }
+  .service-grid {
+    margin-top: var(--space-6);
+  }
+  .service-card {
+    position: relative;
+    padding-left: clamp(4rem, 7vw, 6rem);
+  }
+  .number {
+    position: absolute;
+    top: 1.6rem;
+    left: 1.6rem;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 1.5rem;
+  }
+  .service-meta {
+    color: var(--brown);
+    font-weight: 700;
+  }
+  .about-preview blockquote {
+    margin: 2rem 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--gold);
+    font-family: var(--serif);
+    font-size: var(--step-1);
+  }
+  .portrait-placeholder {
+    display: grid;
+    min-height: 34rem;
+    place-content: center;
+    border: 1px solid var(--stone);
+    border-radius: 48% 48% var(--radius-lg) var(--radius-lg);
+    background: linear-gradient(155deg, var(--blush), var(--paper));
+    color: var(--brown);
+    text-align: center;
+  }
+  .portrait-placeholder span {
+    color: var(--gold);
+    font-size: 4rem;
+  }
+  .process .eyebrow {
+    color: var(--gold-light);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+    padding: 0;
+    list-style: none;
+  }
+  .process-grid li {
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(247, 241, 231, 0.25);
+  }
+  .process-grid span {
+    display: inline-grid;
+    width: 2.4rem;
+    height: 2.4rem;
+    place-content: center;
+    border: 1px solid var(--gold-light);
+    border-radius: 50%;
+    color: var(--gold-light);
+  }
+  .process-grid h3 {
+    margin-top: 1rem;
+  }
+  .pathway-grid {
+    margin-top: var(--space-6);
+  }
+  .pathway-grid a {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .pathway-grid a:hover {
+    transform: translateY(-3px);
+  }
+  .pathway-grid span {
+    color: var(--gold);
+    font-size: 2.4rem;
+  }
+  @media (max-width: 800px) {
+    .home-hero {
+      min-height: auto;
+    }
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-art {
+      min-height: 20rem;
+    }
+    .finder-card {
+      grid-template-columns: 1fr;
+    }
+    .process-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .process-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

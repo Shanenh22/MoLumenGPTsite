@@ -40,4 +40,3 @@ Avoid: “This eclipse will transform your life.”
 - “Healing” should not imply medical or mental-health treatment.
 - Faith discussion is personal and distinctive, but should remain an invitation rather than a universal claim.
 - Quotations attributed to Carl Jung and Alan Oken need source and rights verification before reuse.
-

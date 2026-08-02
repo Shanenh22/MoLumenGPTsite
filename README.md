@@ -25,4 +25,3 @@ Start with:
 ## Planned stack
 
 Astro, TypeScript, static HTML by default, Astro content collections, Markdown/MDX, centralized typed data, minimal client JavaScript, Cloudflare Pages, Cal.com with Stripe, MailerLite, and optional GA4.
-

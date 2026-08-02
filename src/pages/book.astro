@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { services } from '../data/services';
+---
+
+<BaseLayout title="Book a Reading" noindex
+  ><PageHero
+    eyebrow="Booking"
+    title="Review everything before you choose a time."
+    lede="This staging page will connect to Cal.com with Stripe after Mo confirms services, prices, policies, and event settings."
+  /><section class="section">
+    <div class="container booking-layout">
+      <div>
+        <h2>Choose a verified reading</h2><div class="booking-services">
+          {
+            services.map((service) => (
+              <a href={`/readings/${service.slug}/`}>
+                <>
+                  <strong>{service.shortName}</strong>
+                  <span>
+                    {service.duration} · {service.price}
+                  </span>
+                </>
+              </a>
+            ))
+          }
+        </div>
+      </div><aside class="card">
+        <p class="eyebrow">Integration not yet active</p><h2>No payment will be taken.</h2><p>
+          The current public source does not provide verified prices or policies. The booking embed
+          remains disabled until owner approval.
+        </p><a class="button secondary" href="/contact/">Ask Mo a question</a>
+      </aside>
+    </div>
+  </section></BaseLayout
+><style>
+  .booking-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  .booking-services {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .booking-services a {
+    display: grid;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--stone);
+    border-radius: var(--radius-md);
+    background: var(--paper-light);
+    text-decoration: none;
+  }
+  .booking-services span {
+    color: var(--brown);
+    font-size: var(--step--1);
+  }
+  @media (max-width: 760px) {
+    .booking-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

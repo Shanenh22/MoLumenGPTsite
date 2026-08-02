@@ -13,17 +13,17 @@ Accessed: 2026-08-02. Scope: publicly reachable pages in the live Squarespace si
 
 ## Content by family
 
-| Family | Current material | Assessment | Proposed treatment |
-|---|---|---|---|
-| Home | Brand promise, Mo traits, natal/relationship/location themes, philosophy | Strong voice; service naming conflicts with Services page; some deterministic phrasing | Rewrite around perspective, choice, and a guided reading path |
-| About | Biography, philosophy, credentials, memberships, personal interests | Rich and distinctive; credentials and current offices need re-verification | Separate About, Approach, and Credentials; preserve first-person warmth |
-| Services | Natal, Solar Return, Life Changes, Relationship | No prices; little operational detail; no dedicated pages | Confirm inventory, then create typed records and detail pages |
-| Appointments | Short intro plus embedded Acuity | Embed resolves to a demo; no policies or trust context | Replace with site-owned booking landing and Cal.com fallback |
-| Blog | Six lunation articles from Sep 2024–Feb 2025 | Original voice and useful recurring format; stale “current” framing | Migrate as dated articles; separate archive from Current Sky |
-| Newsletter | Repeated signup forms, landing and copy pages | Message is generic; provider/configuration unknown | One reusable MailerLite adapter and consent pattern |
-| Courses/funnels | Courses, sales page, lead generation, waitlist, coming-soon copies | Mostly template or unfinished material | Keep unpublished until real offering/lead magnet is approved |
-| Policies | Privacy, two Terms routes, cookie page | Privacy is dated; one Terms page contains template sales copy and lorem ipsum | Draft replacements clearly marked for professional review |
-| Utility | Contact, thank-you, 404 | Contact has only signup, not a clear inquiry path; utility content duplicated | Rebuild minimal, accessible utility flows |
+| Family          | Current material                                                         | Assessment                                                                             | Proposed treatment                                                      |
+| --------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Home            | Brand promise, Mo traits, natal/relationship/location themes, philosophy | Strong voice; service naming conflicts with Services page; some deterministic phrasing | Rewrite around perspective, choice, and a guided reading path           |
+| About           | Biography, philosophy, credentials, memberships, personal interests      | Rich and distinctive; credentials and current offices need re-verification             | Separate About, Approach, and Credentials; preserve first-person warmth |
+| Services        | Natal, Solar Return, Life Changes, Relationship                          | No prices; little operational detail; no dedicated pages                               | Confirm inventory, then create typed records and detail pages           |
+| Appointments    | Short intro plus embedded Acuity                                         | Embed resolves to a demo; no policies or trust context                                 | Replace with site-owned booking landing and Cal.com fallback            |
+| Blog            | Six lunation articles from Sep 2024–Feb 2025                             | Original voice and useful recurring format; stale “current” framing                    | Migrate as dated articles; separate archive from Current Sky            |
+| Newsletter      | Repeated signup forms, landing and copy pages                            | Message is generic; provider/configuration unknown                                     | One reusable MailerLite adapter and consent pattern                     |
+| Courses/funnels | Courses, sales page, lead generation, waitlist, coming-soon copies       | Mostly template or unfinished material                                                 | Keep unpublished until real offering/lead magnet is approved            |
+| Policies        | Privacy, two Terms routes, cookie page                                   | Privacy is dated; one Terms page contains template sales copy and lorem ipsum          | Draft replacements clearly marked for professional review               |
+| Utility         | Contact, thank-you, 404                                                  | Contact has only signup, not a clear inquiry path; utility content duplicated          | Rebuild minimal, accessible utility flows                               |
 
 ## Repetition, contradictions, and stale material
 
@@ -62,4 +62,3 @@ Accessed: 2026-08-02. Scope: publicly reachable pages in the live Squarespace si
 - Any testimonial and its publication permission.
 - Rights and original files for photographs.
 - Whether the six existing lunation articles may be migrated and edited.
-

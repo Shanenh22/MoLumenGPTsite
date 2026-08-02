@@ -1,0 +1,9 @@
+{
+  "name": "Mo Lumen Astrology",
+  "short_name": "Mo Lumen",
+  "description": "Warm, practical astrology with a classical lens.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f1e7",
+  "theme_color": "#17243a"
+}

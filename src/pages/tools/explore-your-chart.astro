@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+const layers = [
+  {
+    id: 'planets',
+    symbol: '●',
+    name: 'Planets',
+    short: 'What is acting?',
+    description:
+      'Planets represent functions and drives: how we assert, connect, think, feel, organize, or grow.',
+  },
+  {
+    id: 'signs',
+    symbol: '◇',
+    name: 'Signs',
+    short: 'How does it act?',
+    description:
+      'Signs describe style and expression—the manner in which a planet’s function tends to operate.',
+  },
+  {
+    id: 'houses',
+    symbol: '⌂',
+    name: 'Houses',
+    short: 'Where does it act?',
+    description:
+      'Houses describe areas of lived experience, from identity and resources to relationships and community.',
+  },
+  {
+    id: 'aspects',
+    symbol: '—',
+    name: 'Aspects',
+    short: 'How do factors relate?',
+    description:
+      'Aspects describe relationships between chart factors: ease, tension, emphasis, and the need to integrate.',
+  },
+];
+---
+
+<BaseLayout
+  title="Explore Your Chart"
+  description="An accessible educational introduction to planets, signs, houses, and aspects. No birth data or chart calculation required."
+  ><PageHero
+    eyebrow="Educational tool"
+    title="A chart is a conversation between four layers."
+    lede="This is not a personalized chart or reading. It asks for no birth information and stores nothing."
+  />
+  <section class="section">
+    <div class="container explorer">
+      <div class="chart-wheel" aria-hidden="true">
+        <div class="ring ring-1">PLANETS</div><div class="ring ring-2">SIGNS</div><div
+          class="ring ring-3"
+        >
+          HOUSES
+        </div><div class="core">✦</div>
+      </div><div class="layer-controls" role="tablist" aria-label="Chart layers">
+        {
+          layers.map((layer, index) => (
+            <button
+              id={`tab-${layer.id}`}
+              role="tab"
+              aria-selected={index === 0 ? 'true' : 'false'}
+              aria-controls={`panel-${layer.id}`}
+              tabindex={index === 0 ? '0' : '-1'}
+              data-layer={layer.id}
+            >
+              <>
+                <span>{layer.symbol}</span>
+                <strong>{layer.name}</strong>
+                <small>{layer.short}</small>
+              </>
+            </button>
+          ))
+        }
+      </div><div class="layer-panels">
+        {
+          layers.map((layer, index) => (
+            <article
+              id={`panel-${layer.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${layer.id}`}
+              hidden={index !== 0}
+            >
+              <>
+                <p class="eyebrow">{layer.short}</p>
+                <h2>{layer.name}</h2>
+                <p class="lede">{layer.description}</p>
+                <a href={`/explore/${layer.id}/`}>Learn more about {layer.name.toLowerCase()} →</a>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <section class="section surface">
+    <div class="container reading-width">
+      <h2>Put the layers together</h2><p>
+        A planet is the actor, a sign is its style, a house is the part of life where the action
+        takes place, and aspects describe how the actors work together. A real chart requires
+        synthesis; no single placement defines a person.
+      </p>
+    </div>
+  </section></BaseLayout
+>
+<script>
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+  const select = (tab: HTMLButtonElement) => {
+    tabs.forEach((t) => {
+      const active = t === tab;
+      t.setAttribute('aria-selected', String(active));
+      t.tabIndex = active ? 0 : -1;
+      const p = document.getElementById(t.getAttribute('aria-controls') || '');
+      if (p) p.hidden = !active;
+    });
+  };
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', (e) => {
+      if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(e.key)) return;
+      e.preventDefault();
+      let next =
+        e.key === 'Home'
+          ? 0
+          : e.key === 'End'
+            ? tabs.length - 1
+            : e.key === 'ArrowRight'
+              ? (i + 1) % tabs.length
+              : (i - 1 + tabs.length) % tabs.length;
+      select(tabs[next]);
+      tabs[next].focus();
+    });
+  });
+</script>
+<style>
+  .explorer {
+    display: grid;
+    grid-template-columns: 22rem 1fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  .chart-wheel {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--navy);
+    box-shadow: var(--shadow);
+  }
+  .ring {
+    position: absolute;
+    display: grid;
+    place-items: start center;
+    border: 1px solid rgba(247, 241, 231, 0.3);
+    border-radius: 50%;
+    padding-top: 0.7rem;
+    color: var(--gold-light);
+    font-size: 0.63rem;
+    letter-spacing: 0.16em;
+  }
+  .ring-1 {
+    inset: 14%;
+  }
+  .ring-2 {
+    inset: 28%;
+  }
+  .ring-3 {
+    inset: 41%;
+  }
+  .core {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--gold-light);
+    font-size: 2rem;
+  }
+  .layer-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .layer-controls button {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    text-align: left;
+    padding: 1rem;
+    border: 1px solid var(--stone);
+    border-radius: var(--radius-md);
+    background: var(--paper-light);
+  }
+  .layer-controls button[aria-selected='true'] {
+    border-color: var(--clay);
+    background: var(--paper);
+  }
+  .layer-controls span {
+    grid-row: 1/3;
+    color: var(--gold);
+    font-size: 1.6rem;
+  }
+  .layer-controls small {
+    color: var(--brown);
+  }
+  .layer-panels {
+    grid-column: 2;
+  }
+  .layer-panels article {
+    padding-top: var(--space-5);
+  }
+  @media (max-width: 760px) {
+    .explorer {
+      grid-template-columns: 1fr;
+    }
+    .chart-wheel {
+      width: min(100%, 20rem);
+      margin: auto;
+    }
+    .layer-panels {
+      grid-column: auto;
+    }
+  }
+  @media (max-width: 430px) {
+    .layer-controls {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

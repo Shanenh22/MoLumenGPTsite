@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout title="Videos"
+  ><PageHero
+    eyebrow="Videos"
+    title="Watch, listen, and learn with Mo."
+    lede="YouTube and Instagram collections will use fast, privacy-conscious facades after Mo supplies the approved channels and featured videos."
+  /><section class="section">
+    <div class="container grid grid-2">
+      <article class="video-placeholder">
+        <span aria-hidden="true">▶</span><h2>Current Sky</h2><p>Approved videos needed</p>
+      </article><article class="video-placeholder">
+        <span aria-hidden="true">▶</span><h2>Astrology Basics</h2><p>Approved videos needed</p>
+      </article><article class="video-placeholder">
+        <span aria-hidden="true">▶</span><h2>Relationships</h2><p>Approved videos needed</p>
+      </article><article class="video-placeholder">
+        <span aria-hidden="true">▶</span><h2>Personal Purpose</h2><p>Approved videos needed</p>
+      </article>
+    </div>
+  </section></BaseLayout
+><style>
+  .video-placeholder {
+    min-height: 18rem;
+    padding: var(--space-5);
+    border-radius: var(--radius-md);
+    background: var(--navy);
+    color: var(--ivory);
+  }
+  .video-placeholder span {
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    place-content: center;
+    border: 1px solid var(--gold-light);
+    border-radius: 50%;
+    color: var(--gold-light);
+  }
+</style>

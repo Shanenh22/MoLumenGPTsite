@@ -23,4 +23,3 @@ Five page-family illustrations, 12 zodiac icons, 10–12 functional icons, six d
 - Approved logo source if one exists.
 - Approved social/video thumbnails or permission to generate non-personal frames.
 - Moodboard source file and any licensed font information.
-

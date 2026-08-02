@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { topics } from '../../data/learn';
+---
+
+<BaseLayout title="Explore Astrology"
+  ><PageHero
+    eyebrow="Explore Astrology"
+    title="Learn the language without losing the person."
+    lede="Clear foundations for beginners, with enough substance to support deeper study."
+  /><section class="section">
+    <div class="container grid grid-3">
+      {
+        topics.map((topic) => (
+          <article class="card">
+            <>
+              <h2>
+                <a href={`/explore/${topic.slug}/`}>{topic.title}</a>
+              </h2>
+              <p>{topic.answer}</p>
+            </>
+          </article>
+        ))
+      }
+    </div>
+  </section><section class="section navy-surface">
+    <div class="container grid grid-2">
+      <div>
+        <p class="eyebrow">Interactive guide</p><h2>See how a chart’s layers fit together.</h2>
+      </div><div>
+        <p>
+          Explore planets, signs, houses, and aspects without entering birth information or
+          generating a personal chart.
+        </p><a class="button light" href="/tools/explore-your-chart/">Explore Your Chart</a>
+      </div>
+    </div>
+  </section></BaseLayout
+>

@@ -1,0 +1,232 @@
+---
+import { navigation } from '../data/site';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Mo Lumen Astrology, home">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span><strong>Mo Lumen</strong><small>Astrology</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a class="button" href="/book/">Book a Reading</a>
+    </nav>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span>Menu</span><span class="menu-lines" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="mobile-menu-inner" role="dialog" aria-modal="true" aria-label="Site menu">
+      <div class="mobile-menu-top">
+        <span class="eyebrow">Explore Mo Lumen</span>
+        <button class="close-button" type="button">Close <span aria-hidden="true">×</span></button>
+      </div>
+      <nav aria-label="Mobile navigation">
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/reading-finder/">Find Your Reading</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <a class="button light" href="/book/">Book a Reading</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-button');
+  const menu = document.querySelector<HTMLElement>('.mobile-menu');
+  const close = document.querySelector<HTMLButtonElement>('.close-button');
+  let previousFocus: HTMLElement | null = null;
+
+  const focusable = () =>
+    menu ? [...menu.querySelectorAll<HTMLElement>('a, button:not([disabled])')] : [];
+  const openMenu = () => {
+    if (!button || !menu) return;
+    previousFocus = document.activeElement as HTMLElement;
+    menu.hidden = false;
+    button.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+    focusable()[0]?.focus();
+  };
+  const closeMenu = () => {
+    if (!button || !menu) return;
+    menu.hidden = true;
+    button.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+    previousFocus?.focus();
+  };
+  button?.addEventListener('click', openMenu);
+  close?.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', (event) => {
+    if (menu?.hidden) return;
+    if (event.key === 'Escape') closeMenu();
+    if (event.key === 'Tab') {
+      const items = focusable();
+      const first = items[0];
+      const last = items.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      }
+      if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    z-index: 50;
+    top: 0;
+    border-bottom: 1px solid rgba(207, 196, 183, 0.8);
+    background: rgba(247, 241, 231, 0.96);
+    backdrop-filter: blur(14px);
+  }
+  .header-inner {
+    display: flex;
+    min-height: 5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+  }
+  .brand:hover {
+    color: var(--navy);
+  }
+  .brand-mark {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    place-items: center;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold);
+  }
+  .brand strong,
+  .brand small {
+    display: block;
+    line-height: 1.05;
+  }
+  .brand strong {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  .brand small {
+    margin-top: 0.2rem;
+    color: var(--brown);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.7rem, 2vw, 1.6rem);
+    font-size: 0.9rem;
+  }
+  .desktop-nav > a:not(.button) {
+    text-decoration: none;
+  }
+  .desktop-nav .button {
+    min-height: 2.7rem;
+    padding-inline: 1rem;
+  }
+  .menu-button {
+    display: none;
+    min-width: 3rem;
+    min-height: 3rem;
+    align-items: center;
+    gap: 0.65rem;
+    border: 0;
+    background: transparent;
+    font-weight: 700;
+  }
+  .menu-lines,
+  .menu-lines::before,
+  .menu-lines::after {
+    display: block;
+    width: 1.35rem;
+    height: 1px;
+    background: var(--navy);
+    content: '';
+  }
+  .menu-lines {
+    position: relative;
+  }
+  .menu-lines::before {
+    position: absolute;
+    top: -0.38rem;
+  }
+  .menu-lines::after {
+    position: absolute;
+    top: 0.38rem;
+  }
+  .mobile-menu {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    background: rgba(23, 36, 58, 0.35);
+  }
+  .mobile-menu-inner {
+    display: flex;
+    width: min(100%, 28rem);
+    min-height: 100dvh;
+    margin-left: auto;
+    flex-direction: column;
+    padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right))
+      max(1.25rem, env(safe-area-inset-bottom)) 1.25rem;
+    background: var(--navy);
+    color: var(--ivory);
+    box-shadow: var(--shadow);
+  }
+  .mobile-menu-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mobile-menu .eyebrow {
+    margin: 0;
+    color: var(--gold-light);
+  }
+  .close-button {
+    min-width: 3rem;
+    min-height: 3rem;
+    border: 0;
+    background: transparent;
+    color: var(--ivory);
+  }
+  .close-button span {
+    font-size: 1.7rem;
+  }
+  .mobile-menu nav {
+    display: grid;
+    margin-block: 3rem;
+  }
+  .mobile-menu nav a {
+    padding-block: 0.85rem;
+    border-bottom: 1px solid rgba(247, 241, 231, 0.2);
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    text-decoration: none;
+  }
+  .mobile-menu .button {
+    margin-top: auto;
+  }
+  @media (max-width: 980px) {
+    .desktop-nav {
+      display: none;
+    }
+    .menu-button {
+      display: flex;
+    }
+  }
+</style>

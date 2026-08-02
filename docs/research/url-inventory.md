@@ -4,30 +4,30 @@ Accessed: 2026-08-02. The live Squarespace sitemap returned 55 URLs. The root ho
 
 ## Core and utility pages
 
-| Current URL | Finding | Preliminary disposition |
-|---|---|---|
-| `/` | Main brand/service homepage | Rewrite at `/` |
-| `/about` | Biography, credentials, philosophy | Split to `/about/`, `/approach/`, `/credentials/` |
-| `/services-2` | Current service overview | Redirect to `/readings/` after service confirmation |
-| `/appointments` | Broken/unverified Acuity demo embed | Redirect to `/book/` after Cal.com setup |
-| `/contact` | Newsletter-led contact page | Rewrite at `/contact/` |
-| `/privacy` | Dated policy | Replace at `/privacy/` after professional review |
-| `/terms`, `/terms-1` | Conflicting terms; one template/lorem page | Consolidate to `/terms/`; remove template content |
-| `/cookies-2` | Squarespace-specific cookie copy | Redirect to reviewed cookie information section/page |
-| `/404` | Existing utility page | Replace with static `/404.html` behavior |
-| `/thank-you` | Generic confirmation | Keep only if tied to a real form state; noindex |
+| Current URL          | Finding                                    | Preliminary disposition                              |
+| -------------------- | ------------------------------------------ | ---------------------------------------------------- |
+| `/`                  | Main brand/service homepage                | Rewrite at `/`                                       |
+| `/about`             | Biography, credentials, philosophy         | Split to `/about/`, `/approach/`, `/credentials/`    |
+| `/services-2`        | Current service overview                   | Redirect to `/readings/` after service confirmation  |
+| `/appointments`      | Broken/unverified Acuity demo embed        | Redirect to `/book/` after Cal.com setup             |
+| `/contact`           | Newsletter-led contact page                | Rewrite at `/contact/`                               |
+| `/privacy`           | Dated policy                               | Replace at `/privacy/` after professional review     |
+| `/terms`, `/terms-1` | Conflicting terms; one template/lorem page | Consolidate to `/terms/`; remove template content    |
+| `/cookies-2`         | Squarespace-specific cookie copy           | Redirect to reviewed cookie information section/page |
+| `/404`               | Existing utility page                      | Replace with static `/404.html` behavior             |
+| `/thank-you`         | Generic confirmation                       | Keep only if tied to a real form state; noindex      |
 
 ## Editorial pages
 
-| Current URL | Finding | Preliminary disposition |
-|---|---|---|
-| `/blog` | Six-article archive | Redirect to `/articles/` or retain `/blog/` via final migration decision |
-| `/blog/new-moon-in-pisces-3knsx-ty3bb` | Dated article | Migrate with clean slug after editorial review |
-| `/blog/new-moon-in-aqaurius-3knsx` | Typo in slug | Migrate with corrected Aquarius slug and 301 |
-| `/blog/new-moon-in-sagittarius` | Dated article | Migrate with date/context preserved |
-| `/blog/scorpio-new-moon-november-2024` | Dated article | Migrate after review |
-| `/blog/libra-new-moon-october-2024-eclipse` | Dated article | Migrate after review |
-| `/blog/virgo-new-moon-september-2024` | Dated article | Migrate after review |
+| Current URL                                 | Finding             | Preliminary disposition                                                  |
+| ------------------------------------------- | ------------------- | ------------------------------------------------------------------------ |
+| `/blog`                                     | Six-article archive | Redirect to `/articles/` or retain `/blog/` via final migration decision |
+| `/blog/new-moon-in-pisces-3knsx-ty3bb`      | Dated article       | Migrate with clean slug after editorial review                           |
+| `/blog/new-moon-in-aqaurius-3knsx`          | Typo in slug        | Migrate with corrected Aquarius slug and 301                             |
+| `/blog/new-moon-in-sagittarius`             | Dated article       | Migrate with date/context preserved                                      |
+| `/blog/scorpio-new-moon-november-2024`      | Dated article       | Migrate after review                                                     |
+| `/blog/libra-new-moon-october-2024-eclipse` | Dated article       | Migrate after review                                                     |
+| `/blog/virgo-new-moon-september-2024`       | Dated article       | Migrate after review                                                     |
 
 ## Archive URLs
 
@@ -42,4 +42,3 @@ Astrology-relevant archive URLs should redirect to a curated topic or article ar
 ## Mo1 reference
 
 The reference exposes one confirmed public document: `https://shanenh22.github.io/Mo1/`. Its navigation proposes many routes but points them at currently missing `molumen.com` URLs. These links are architecture hypotheses, not evidence of published pages or approved services.
-

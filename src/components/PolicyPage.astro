@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from './PageHero.astro';
+interface Props {
+  title: string;
+  intro: string;
+}
+const { title, intro } = Astro.props;
+---
+
+<BaseLayout title={title} noindex
+  ><PageHero eyebrow="Draft policy" title={title} lede={intro} /><section class="section">
+    <article class="container reading-width prose">
+      <div class="notice">
+        <strong>Professional review required:</strong> This is a plain-language staging draft, not a claim
+        of legal compliance.
+      </div><slot />
+    </article>
+  </section></BaseLayout
+>

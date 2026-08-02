@@ -35,4 +35,3 @@
 ## Measurement without sensitive data
 
 Centralize GA4 and allow the site to run with no ID. Event parameters may include service slug, tool step, content category, and placement—but never names, contact details, birth data, location, or free-text questions.
-

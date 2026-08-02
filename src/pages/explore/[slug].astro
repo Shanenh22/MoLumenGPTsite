@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { topics } from '../../data/learn';
+export function getStaticPaths() {
+  return topics.map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
+}
+const { topic } = Astro.props;
+---
+
+<BaseLayout title={topic.title} description={topic.answer}
+  ><PageHero eyebrow="Astrology foundations" title={topic.title} lede={topic.answer} /><section
+    class="section"
+  >
+    <article class="container reading-width prose">
+      <h2>A practical way to begin</h2><p>{topic.prompt}</p><p>
+        No single symbol defines a person. Meaning comes from context, relationship, repetition, and
+        the life someone is actually living.
+      </p><h2>Keep exploring</h2><p>
+        Return to the larger chart and connect this topic naturally with planets, signs, houses,
+        aspects, and timing.
+      </p><div class="button-row">
+        <a class="button secondary" href="/explore/">All topics</a><a
+          class="button"
+          href="/tools/explore-your-chart/">Interactive chart guide</a>
+      </div>
+    </article>
+  </section></BaseLayout
+>

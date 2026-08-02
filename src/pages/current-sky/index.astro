@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { skyEvents } from '../../data/sky-events';
+---
+
+<BaseLayout
+  title="Current Sky"
+  description="Current Sky education and verified astrological event notes from Mo Lumen Astrology."
+  ><PageHero
+    eyebrow="Current Sky"
+    title="The sky keeps moving. You do not have to rush with it."
+    lede="A dated, carefully reviewed timeline will separate astronomical timing from Mo’s interpretation—and archive what is no longer current."
+  />
+  <section class="section">
+    <div class="container grid timeline-layout">
+      <aside>
+        <p class="eyebrow">Filter the timeline</p><button
+          class="filter active"
+          type="button"
+          aria-pressed="true">All events</button
+        ><button class="filter" type="button" disabled>New & full moons</button><button
+          class="filter"
+          type="button"
+          disabled>Retrogrades</button
+        ><button class="filter" type="button" disabled>Transits</button>
+      </aside><div class="timeline">
+        <div class="notice">
+          <strong>Staging safeguard:</strong> No astronomical event or interpretation is published until
+          its source, time zone, display period, and verification date are reviewed.
+        </div>{
+          skyEvents.map((event) => (
+            <article>
+              <>
+                <p class="event-date">{event.date}</p>
+                <div>
+                  <>
+                    <span class="label">{event.label}</span>
+                    <h2>{event.title}</h2>
+                    <p>{event.description}</p>
+                  </>
+                </div>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <section class="section surface">
+    <div class="container grid grid-3">
+      <article>
+        <h3>Informational timing</h3><p>
+          Dates, times, signs, and planetary factors—shown with a source and verification date.
+        </p>
+      </article><article>
+        <h3>Mo’s interpretation</h3><p>
+          Clearly labeled reflection on themes and choices, written and reviewed by Mo.
+        </p>
+      </article><article>
+        <h3>A useful next step</h3><p>
+          Questions or practices that support reflection without promising certainty.
+        </p>
+      </article>
+    </div>
+  </section></BaseLayout
+>
+<style>
+  .timeline-layout {
+    grid-template-columns: 16rem 1fr;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  .timeline-layout aside {
+    position: sticky;
+    top: 7rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .filter {
+    min-height: 3rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--stone);
+    border-radius: 999px;
+    background: transparent;
+    text-align: left;
+  }
+  .filter.active {
+    background: var(--navy);
+    color: white;
+  }
+  .timeline {
+    position: relative;
+  }
+  .timeline article {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: var(--space-5);
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--stone);
+  }
+  .event-date {
+    font-weight: 700;
+  }
+  .label {
+    color: var(--clay);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  @media (max-width: 700px) {
+    .timeline-layout {
+      grid-template-columns: 1fr;
+    }
+    .timeline-layout aside {
+      position: static;
+    }
+    .timeline article {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

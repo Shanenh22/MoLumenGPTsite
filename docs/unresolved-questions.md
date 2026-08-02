@@ -29,4 +29,3 @@
 16. What jurisdictions and minimum client age should reviewed policies address?
 17. Where are birth details currently stored, for how long, who can access them, and how can a client request deletion?
 18. What contact channels, business address (if any), time zone, and response-time expectation may be published?
-

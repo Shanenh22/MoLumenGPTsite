@@ -63,4 +63,3 @@ Desktop uses two concise disclosures—Readings and Explore Astrology—while ot
 ## Footer groups
 
 Readings; Learn; Current Sky & Media; About & Contact; Policies; newsletter. All labels and URLs come from centralized configuration.
-

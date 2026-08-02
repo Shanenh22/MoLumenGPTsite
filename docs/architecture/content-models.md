@@ -17,4 +17,3 @@ Navigation, footer, contact, social links, FAQs, integration settings, analytics
 ## Review states
 
 Every factual/editorial record supports `draft`, `owner-review`, `approved`, and `archived`. Production builds exclude unapproved testimonials, unavailable services, expired Current Sky entries, and unfinished products.
-

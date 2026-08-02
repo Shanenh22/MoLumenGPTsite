@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contact"
+  ><PageHero
+    eyebrow="Contact"
+    title="Questions are welcome."
+    lede="If you are unsure about birth information, accessibility, or which reading fits, contact Mo before booking."
+  /><section class="section">
+    <div class="container reading-width">
+      <div class="card">
+        <p class="eyebrow">Email Mo</p><h2><a href={`mailto:${site.email}`}>{site.email}</a></h2><p>
+          Please do not send full birth details or sensitive intake information by ordinary email
+          unless Mo asks you to use an approved secure process.
+        </p>
+      </div>
+    </div>
+  </section></BaseLayout
+>

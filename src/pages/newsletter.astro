@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout title="Newsletter"
+  ><PageHero
+    eyebrow="Letters from Mo"
+    title="Notice the opportunities ahead—with both feet in your own life."
+    lede="A calm guide to what an astrology reading can illuminate, plus thoughtful notes about the moving sky."
+  /><section class="section">
+    <div class="container signup-grid">
+      <article class="prose">
+        <h2>Planned free guide</h2><p>
+          <em
+            >Recognizing Opportunity: How an Astrology Reading Can Help You Prepare, Reflect, and
+            Choose</em>
+        </p><p>
+          The editorial outline and design direction are ready. The guide itself has not been
+          supplied or approved, so this staging site will not promise a download yet.
+        </p><h2>What the newsletter will offer</h2><ul>
+          <li>Current Sky notes in Mo’s voice</li><li>Practical astrology education</li><li>
+            New articles, videos, and offerings—without manufactured urgency
+          </li>
+        </ul>
+      </article><aside class="card">
+        <p class="eyebrow">MailerLite connection pending</p><h2>Signup opens after approval.</h2><p>
+          Marketing consent will be optional, specific, and never preselected. The form adapter will
+          activate when the public MailerLite identifiers and privacy wording are confirmed.
+        </p>
+      </aside>
+    </div>
+  </section></BaseLayout
+><style>
+  .signup-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  @media (max-width: 760px) {
+    .signup-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

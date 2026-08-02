@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="Reading Finder"
+  description="Answer a few plain-language questions to find a verified Mo Lumen Astrology consultation that may fit your situation."
+>
+  <PageHero
+    eyebrow="Reading Finder"
+    title="What brings you here?"
+    lede="A short, private guide. Your answers stay in this page for this visit only and are never sent or stored."
+  />
+  <section class="section">
+    <div class="container finder-shell" data-finder>
+      <div class="progress-wrap">
+        <p id="finder-status" aria-live="polite">Question 1 of 4</p><div
+          class="progress"
+          aria-hidden="true"
+        >
+          <span></span>
+        </div>
+      </div><div class="finder-panel" tabindex="-1"></div><div class="finder-actions">
+        <button class="button secondary back" type="button" disabled>Back</button><button
+          class="restart"
+          type="button">Restart</button>
+      </div>
+    </div>
+  </section>
+  <noscript
+    ><div class="container notice">
+      The Reading Finder needs JavaScript. You can still <a href="/readings/"
+        >compare all readings</a
+      > without it.
+    </div></noscript
+  >
+</BaseLayout>
+<script>
+  const steps = [
+    {
+      question: 'What are you hoping to understand?',
+      options: [
+        ['self', 'Myself more broadly'],
+        ['current', 'A current situation or transition'],
+        ['relationship', 'A relationship'],
+        ['year', 'The year around my birthday'],
+      ],
+    },
+    {
+      question: 'How focused is your question?',
+      options: [
+        ['broad', 'I want a wide-angle view'],
+        ['defined', 'I have a defined area of focus'],
+      ],
+    },
+    {
+      question: 'Is timing part of what you want to explore?',
+      options: [
+        ['yes', 'Yes, timing matters'],
+        ['no', 'Not especially'],
+      ],
+    },
+    {
+      question: 'Do you have reasonably accurate birth information?',
+      options: [
+        ['exact', 'Yes, including a birth time'],
+        ['uncertain', 'Some information, but the time is uncertain'],
+      ],
+    },
+  ];
+  const state: string[] = [];
+  let index = 0;
+  const shell = document.querySelector<HTMLElement>('[data-finder]');
+  const panel = shell?.querySelector<HTMLElement>('.finder-panel');
+  const back = shell?.querySelector<HTMLButtonElement>('.back');
+  const restart = shell?.querySelector<HTMLButtonElement>('.restart');
+  const status = document.querySelector<HTMLElement>('#finder-status');
+  const bar = shell?.querySelector<HTMLElement>('.progress span');
+  const result = () =>
+    state[0] === 'relationship'
+      ? [
+          'Relationship consultation',
+          'relationship-consultation',
+          'Because your focus is the dynamic between two people, this reading brings both charts into conversation.',
+        ]
+      : state[0] === 'year'
+        ? [
+            'Solar return consultation',
+            'solar-return-consultation',
+            'Because you want an annual view, this reading focuses on the chart for the year around your birthday.',
+          ]
+        : state[0] === 'current' || state[2] === 'yes'
+          ? [
+              'Life changes consultation',
+              'life-changes-consultation',
+              'Because your question is connected to a present transition or timing, this reading focuses on what is being emphasized now.',
+            ]
+          : [
+              'Natal chart consultation',
+              'natal-chart-consultation',
+              'Because you want a broad foundation, the natal consultation offers the widest view of your chart and life themes.',
+            ];
+  const render = () => {
+    if (!panel || !status || !bar || !back) return;
+    back.disabled = index === 0;
+    bar.style.width = `${Math.min((index / steps.length) * 100, 100)}%`;
+    if (index < steps.length) {
+      status.textContent = `Question ${index + 1} of ${steps.length}`;
+      const step = steps[index];
+      panel.innerHTML = `<fieldset><legend>${step.question}</legend><div class="options">${step.options.map(([value, label]) => `<button type="button" data-value="${value}">${label}<span aria-hidden="true">→</span></button>`).join('')}</div></fieldset>`;
+      panel.querySelectorAll<HTMLButtonElement>('[data-value]').forEach((btn) =>
+        btn.addEventListener('click', () => {
+          state[index] = btn.dataset.value || '';
+          index++;
+          render();
+        }),
+      );
+    } else {
+      const [name, slug, why] = result();
+      status.textContent = 'Your recommendation';
+      bar.style.width = '100%';
+      panel.innerHTML = `<div class="result"><p class="eyebrow">A reading that may fit</p><h2>${name}</h2><p>${why}</p>${state[3] === 'uncertain' ? '<p class="notice"><strong>Birth time uncertain?</strong> Mo can explain what is and is not possible before you book.</p>' : ''}<p>You may choose any service. This is a guide, not a restriction.</p><div class="button-row"><a class="button" href="/readings/${slug}/">See full details</a><a class="button secondary" href="/book/?service=${slug}">Review booking</a></div></div>`;
+    }
+    panel.focus();
+  };
+  back?.addEventListener('click', () => {
+    if (index > 0) {
+      index--;
+      state.splice(index);
+      render();
+    }
+  });
+  restart?.addEventListener('click', () => {
+    index = 0;
+    state.length = 0;
+    render();
+  });
+  render();
+</script>
+<style>
+  .finder-shell {
+    max-width: 50rem;
+  }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .progress-wrap p {
+    min-width: 8rem;
+    margin: 0;
+    font-weight: 700;
+  }
+  .progress {
+    height: 0.4rem;
+    flex: 1;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--stone);
+  }
+  .progress span {
+    display: block;
+    height: 100%;
+    background: var(--clay);
+    transition: width 0.2s;
+  }
+  .finder-panel {
+    min-height: 25rem;
+    padding-block: var(--space-6);
+  }
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  legend {
+    margin-bottom: var(--space-5);
+    font-family: var(--serif);
+    font-size: var(--step-3);
+    line-height: 1.1;
+  }
+  .options {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .options button {
+    display: flex;
+    min-height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--stone);
+    border-radius: var(--radius-md);
+    background: var(--paper-light);
+    text-align: left;
+  }
+  .options button:hover {
+    border-color: var(--clay);
+    background: var(--paper);
+  }
+  .finder-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--stone);
+    padding-top: var(--space-4);
+  }
+  .restart {
+    min-height: 3rem;
+    border: 0;
+    background: transparent;
+    text-decoration: underline;
+  }
+  .result h2 {
+    font-size: var(--step-3);
+  }
+</style>

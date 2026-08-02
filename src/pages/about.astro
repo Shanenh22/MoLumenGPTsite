@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="About Mo"
+  description="Meet Mo, the astrologer, teacher, and writer behind Mo Lumen Astrology."
+  ><PageHero
+    eyebrow="About Mo"
+    title="Astrologer. Teacher. Writer."
+    lede="A modern-day astrologer with a classical lens—and an interpreter of the language of the planets."
+  />
+  <section class="section">
+    <div class="container grid about-grid">
+      <div class="portrait" role="img" aria-label="Approved portrait of Mo needed">
+        <span>✦</span><p>Owner-supplied portrait</p>
+      </div><article class="prose">
+        <h2>My path, so far</h2><p>
+          My experiences, both the good and the not-so-good, help me relate to many kinds of people.
+          I have worked in the business world and taught natural sciences from middle school through
+          college. I am a wife, a mom, a learner, and a maker.
+        </p><p>
+          Along with the mystical, I have a very practical side. I connect your reading directly to
+          your real-life situations and stories—not just flowery, feel-good platitudes.
+        </p><h2>What matters to me</h2><p>
+          Family, nature, learning, and travel keep me connected to the world beyond a chart.
+          Astrology is most useful when it brings us back to life with more awareness, more
+          compassion, and more room to choose.
+        </p><a class="button secondary" href="/approach/">Read about my approach</a>
+      </article>
+    </div>
+  </section>
+  <section class="section navy-surface">
+    <div class="container reading-width">
+      <p class="eyebrow">Knowledge · insight · choice</p><h2>
+        I use astrology like a mirror or a planner—not a belief system and never a replacement for
+        your agency.
+      </h2>
+    </div>
+  </section></BaseLayout
+>
+<style>
+  .about-grid {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  .portrait {
+    display: grid;
+    min-height: 36rem;
+    place-content: center;
+    border-radius: 48% 48% var(--radius-md) var(--radius-md);
+    background: var(--blush);
+    color: var(--brown);
+    text-align: center;
+  }
+  .portrait span {
+    color: var(--gold);
+    font-size: 4rem;
+  }
+  @media (max-width: 760px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .portrait {
+      min-height: 24rem;
+    }
+  }
+</style>

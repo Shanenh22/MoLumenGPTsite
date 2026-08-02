@@ -27,4 +27,3 @@ Upcoming/recent timeline from a reviewed data file → filter by event type → 
 ## Booking flow
 
 Verified service → review price/duration/format/data → open Cal.com → time zone → intake and terms → Stripe payment → confirmation/reminders/calendar → preparation. Completion analytics fire only from a reliable Cal.com completion signal or confirmed return page.
-

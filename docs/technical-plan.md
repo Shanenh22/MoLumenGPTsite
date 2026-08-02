@@ -33,4 +33,3 @@ Cloudflare Pages preview/staging first: build command `pnpm build`, output `dist
 5. Configure real integrations in staging.
 6. Complete automated and manual QA.
 7. Stakeholder review; only then prepare production migration.
-

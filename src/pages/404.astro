@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found" noindex
+  ><section class="section not-found">
+    <div class="container reading-width">
+      <p class="eyebrow">404 · Page not found</p><h1>This path has gone quiet.</h1><p class="lede">
+        The page may have moved, or the link may be out of date. You can return home or begin with
+        the Reading Finder.
+      </p><div class="button-row">
+        <a class="button" href="/">Return home</a><a
+          class="button secondary"
+          href="/reading-finder/">Find a reading</a>
+      </div>
+    </div>
+  </section></BaseLayout
+><style>
+  .not-found {
+    min-height: 65vh;
+    display: grid;
+    align-items: center;
+  }
+</style>
