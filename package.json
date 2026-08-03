@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
+    "deploy": "wrangler deploy",
     "preview": "astro preview",
     "check": "astro check",
     "format": "prettier --write .",
@@ -20,6 +21,7 @@
     "@astrojs/check": "latest",
     "prettier": "latest",
     "prettier-plugin-astro": "latest",
-    "typescript": ">=5.7 <7"
+    "typescript": ">=5.7 <7",
+    "wrangler": "^4.118.0"
   }
 }
