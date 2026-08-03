@@ -74,6 +74,17 @@ import PageHero from '../components/PageHero.astro';
     },
   ];
   const state: string[] = [];
+  const facts: Record<string, [string, string, string]> = {
+    'relationship-astrology-consultation': ['$275', '90 minutes', 'Birth date, time when available, and location for both people'],
+    'new-client-natal-chart-reading-90': ['$200', '90 minutes', 'Birth date, exact time when available, and birth location'],
+    'new-client-natal-chart-reading-60': ['$150', '60 minutes', 'Birth date, exact time when available, and birth location'],
+    'solar-return-reading': ['$130', '60 minutes', 'Existing natal information and the location relevant to the solar return'],
+    'monthly-personal-transits': ['$75', '30 minutes', 'Existing natal chart information'],
+    'quick-check-in-one-topic': ['$60', '30 minutes', 'Existing natal chart information and one topic submitted after booking'],
+    'life-changes-consultation': ['$130', '60 minutes', 'Existing chart information and updated life context'],
+    'more-clarity-within-three-months': ['$100', '60 minutes', 'Existing chart information and any updated context'],
+    'more-clarity-established-client': ['$130', '60 minutes', 'Existing chart information and any updated context'],
+  };
   let index = 0;
   const shell = document.querySelector<HTMLElement>('[data-finder]');
   const panel = shell?.querySelector<HTMLElement>('.finder-panel');
@@ -152,9 +163,11 @@ import PageHero from '../components/PageHero.astro';
       );
     } else {
       const [name, slug, why] = result();
+      const [price, duration, required] = facts[slug];
+      const alternative = slug === 'new-client-natal-chart-reading-90' ? ['New Client Natal Reading — 60 min', 'new-client-natal-chart-reading-60'] : slug === 'new-client-natal-chart-reading-60' ? ['New Client Natal Reading — 90 min', 'new-client-natal-chart-reading-90'] : ['Compare all readings', ''];
       status.textContent = 'Your recommendation';
       bar.style.width = '100%';
-      panel.innerHTML = `<div class="result"><p class="eyebrow">A reading that may fit</p><h2>${name}</h2><p>${why}</p><p>You may choose any service. This is a guide, not a restriction.</p><div class="button-row"><a class="button" href="/readings/${slug}/">See full details</a><a class="button secondary" href="/book/?service=${slug}">Review booking</a></div></div>`;
+      panel.innerHTML = `<div class="result"><p class="eyebrow">A reading that may fit</p><h2>${name}</h2><p>${why}</p><dl><div><dt>Price</dt><dd>${price}</dd></div><div><dt>Time</dt><dd>${duration}</dd></div><div><dt>What you’ll need</dt><dd>${required}</dd></div></dl><p class="alternative"><strong>Another option:</strong> <a href="${alternative[1] ? `/readings/${alternative[1]}/` : '/readings/'}">${alternative[0]}</a>.</p><p>You may choose any service. This is a guide, not a restriction.</p><div class="button-row"><a class="button" href="/readings/${slug}/">See full details</a><a class="button secondary" href="/book/?service=${slug}">Review booking</a></div></div>`;
     }
     panel.focus();
   };
@@ -249,4 +262,9 @@ import PageHero from '../components/PageHero.astro';
   .result h2 {
     font-size: var(--step-3);
   }
+  .result dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin-block: var(--space-5); }
+  .result dl div { padding: 1rem; border: 1px solid var(--stone); border-radius: var(--radius-md); background: var(--paper-light); }
+  .result dt { font-size: var(--step--1); font-weight: 800; }
+  .result dd { margin: .25rem 0 0; color: var(--navy-soft); }
+  @media (max-width: 600px) { .result dl { grid-template-columns: 1fr; } }
 </style>

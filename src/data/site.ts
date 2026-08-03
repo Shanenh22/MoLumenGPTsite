@@ -11,6 +11,7 @@ export const navigation = [
   { label: 'Readings', href: '/readings/' },
   { label: 'Explore Astrology', href: '/explore/' },
   { label: 'Current Sky', href: '/current-sky/' },
+  { label: 'Blog', href: '/blog/' },
   { label: 'Videos', href: '/videos/' },
   { label: 'About Mo', href: '/about/' },
 ];
@@ -27,13 +28,23 @@ export const footerGroups = [
     ],
   },
   {
-    title: 'Explore',
+    title: 'Classical astrology',
     links: [
-      { label: 'Birth chart basics', href: '/explore/birth-chart-basics/' },
-      { label: 'Explore your chart', href: '/tools/explore-your-chart/' },
-      { label: 'Current Sky', href: '/current-sky/' },
-      { label: 'Articles', href: '/articles/' },
+      { label: 'Essential dignities', href: '/explore/essential-dignities/' },
+      { label: 'Sect', href: '/explore/sect/' },
+      { label: 'Planetary joys', href: '/explore/planetary-joys/' },
+      { label: 'Full library', href: '/explore/' },
+      { label: 'Blog', href: '/blog/' },
       { label: 'Videos', href: '/videos/' },
+    ],
+  },
+  {
+    title: 'Interactive tools',
+    links: [
+      { label: 'Reading Finder', href: '/reading-finder/' },
+      { label: 'Astrology Lab', href: '/tools/astrology-lab/' },
+      { label: 'Explore your chart', href: '/tools/explore-your-chart/' },
+      { label: 'Current Sky timeline', href: '/current-sky/' },
     ],
   },
   {
@@ -41,7 +52,6 @@ export const footerGroups = [
     links: [
       { label: 'Meet Mo', href: '/about/' },
       { label: 'Approach', href: '/approach/' },
-      { label: 'Credentials', href: '/credentials/' },
       { label: 'Contact', href: '/contact/' },
       { label: 'Accessibility', href: '/accessibility/' },
     ],

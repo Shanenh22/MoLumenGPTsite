@@ -5,11 +5,11 @@
   --navy: #17243a;
   --navy-soft: #2f415c;
   --blue: #58718b;
-  --gold: #a98547;
+  --gold: #80602d;
   --gold-light: #d8c39a;
-  --clay: #a8644f;
-  --coral: #d7654d;
-  --cobalt: #287bbf;
+  --clay: #8d4e3d;
+  --coral: #b84c38;
+  --cobalt: #22679d;
   --saffron: #efb84b;
   --sage: #66866f;
   --brown: #62574d;
@@ -45,6 +45,7 @@
 * {
   box-sizing: border-box;
 }
+[hidden] { display: none !important; }
 html {
   scroll-behavior: smooth;
   color-scheme: light;
@@ -70,9 +71,14 @@ a {
   color: inherit;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
+  text-decoration-skip-ink: auto;
 }
 a:hover {
   color: var(--clay);
+}
+.navy-surface a:not(.button):hover,
+.navy-surface a:not(.button):focus-visible {
+  color: var(--gold-light);
 }
 button,
 input,
@@ -82,10 +88,13 @@ select {
 }
 button {
   color: inherit;
+  cursor: pointer;
 }
+button:disabled { cursor: not-allowed; }
 :focus-visible {
-  outline: 3px solid var(--clay);
-  outline-offset: 4px;
+  outline: 3px solid #f4c767;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--navy);
 }
 h1,
 h2,
@@ -196,6 +205,8 @@ p {
     background 0.15s ease,
     box-shadow 0.15s ease;
 }
+.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
+@media (forced-colors: active) { :focus-visible { outline: 3px solid CanvasText; box-shadow: none; } .button { border: 2px solid ButtonText; } }
 .button:hover {
   background: var(--clay);
   border-color: var(--clay);

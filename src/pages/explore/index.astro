@@ -6,13 +6,29 @@ import { topics } from '../../data/learn';
 
 <BaseLayout title="Explore Astrology"
   ><PageHero
-    eyebrow="Explore Astrology"
-    title="Learn the language without losing the person."
-    lede="Clear foundations for beginners, with enough substance to support deeper study."
+    eyebrow="Mo’s classical astrology library"
+    title="Learn the method behind the reading."
+    lede="Begin with classical judgment—dignities, sect, and planetary joys—then connect the doctrine to observable sky positions and Mo’s practical synthesis."
   /><section class="section">
-    <div class="container grid grid-3">
+    <div class="container intro-grid">
+      <div><p class="eyebrow">Three lenses, clearly labeled</p><h2>Measurement. Tradition. Synthesis.</h2></div>
+      <div><p class="lede"><strong>Astronomy</strong> tells us where celestial bodies are. <strong>Classical tradition</strong> supplies the interpretive rules. <strong>Mo’s synthesis</strong> weighs those rules against the whole chart, your question, and the life you are actually living.</p><a class="button" href="/reading-finder/">Find Your Reading</a></div>
+    </div>
+    <div class="container classical-lead">
+      <p class="eyebrow">Begin with Mo’s training</p><h2>The classical foundation modern summaries often skip.</h2>
+      <div class="grid grid-3">
+        {topics.slice(0,3).map((topic,index)=><article class="card"><span>0{index+1}</span><h3><a href={`/explore/${topic.slug}/`}>{topic.title}</a></h3><p>{topic.answer}</p></article>)}
+      </div>
+    </div>
+    <div class="container level-paths" aria-label="Learning paths">
+      <article><p class="path-level newcomer">Newcomer</p><h3>Build a clear foundation</h3><p>Begin with chart basics, then move through planets, signs, houses, and aspects in that order.</p><a href="/explore/birth-chart-basics/">Start at the beginning →</a></article>
+      <article><p class="path-level experienced">Experienced</p><h3>Practice synthesis</h3><p>Connect rulers, condition, repeating themes, relationship dynamics, and timing without reducing the chart to keywords.</p><a href="/tools/astrology-lab/">Practice in the Astrology Lab →</a></article>
+      <article><p class="path-level expert">Expert</p><h3>Examine technique</h3><p>Compare frameworks, state methodological assumptions, and follow technical vocabulary into deeper reference study.</p><a href="/explore/aspects/#expert">Open an expert section →</a></article>
+    </div>
+    <div class="container"><p class="eyebrow">Continue through the chart</p><h2>Reference library</h2></div>
+    <div class="container grid grid-3 topic-grid">
       {
-        topics.map((topic) => (
+        topics.slice(3).map((topic) => (
           <article class="card">
             <>
               <h2>
@@ -24,16 +40,45 @@ import { topics } from '../../data/learn';
         ))
       }
     </div>
-  </section><section class="section navy-surface">
-    <div class="container grid grid-2">
-      <div>
-        <p class="eyebrow">Interactive guide</p><h2>See how a chart’s layers fit together.</h2>
-      </div><div>
-        <p>
-          Explore planets, signs, houses, and aspects without entering birth information or
-          generating a personal chart.
-        </p><a class="button light" href="/tools/explore-your-chart/">Explore Your Chart</a>
+  </section>
+  <section class="section navy-surface">
+    <div class="container">
+      <p class="eyebrow">Interactive tools</p><h2>Learn by exploring.</h2>
+      <div class="grid grid-2 tool-grid">
+        <article><span aria-hidden="true">⚭</span><h3>Astrology Lab</h3><p>Calculate aspect geometry, examine traditional planetary condition, and practice structured synthesis.</p><a class="button light" href="/tools/astrology-lab/">Open the Astrology Lab</a></article>
+        <article><span aria-hidden="true">◎</span><h3>Explore Your Chart</h3><p>See how planets, signs, houses, and aspects work together. No birth information required.</p><a class="button light" href="/tools/explore-your-chart/">Open the chart guide</a></article>
+        <article><span aria-hidden="true">☼</span><h3>Current Sky Timeline</h3><p>Filter verified sky events and distinguish timing information from Mo’s interpretation.</p><a class="button light" href="/current-sky/">Open Current Sky</a></article>
+        <article><span aria-hidden="true">✦</span><h3>Reading Finder</h3><p>Answer four plain-language questions to compare consultations without astrological jargon.</p><a class="button light" href="/reading-finder/">Find a reading</a></article>
       </div>
+    </div>
+  </section>
+  <section class="section surface">
+    <div class="container grid grid-2">
+      <div><p class="eyebrow">Use astrology responsibly</p><h2>A reflective language, not a guarantee.</h2><p>Astrology is an interpretive tradition. It can offer prompts for reflection, timing, and conversation; it cannot establish certainty, replace professional medical, legal, financial, or mental-health advice, or remove your agency.</p><a href="/disclaimer/">Read the full disclaimer</a></div>
+      <aside class="source-note"><h3>Reference desk</h3><p>Our educational structure follows the widely used sequence of planets, signs, houses, and aspects. For additional study, consult independent references and compare schools of practice.</p><ul><li><a href="https://www.astro.com/astrology/in_intro_e.htm" rel="external">Astrodienst: A Brief Introduction to Astrology</a></li><li><a href="https://www.astro.com/astrology/in_house1_e.htm" rel="external">Astrodienst: House systems and chart axes</a></li><li><a href="https://www.britannica.com/topic/astrology" rel="external">Encyclopaedia Britannica: History and context of astrology</a></li></ul></aside>
     </div>
   </section></BaseLayout
 >
+
+<style>
+  .intro-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--space-6); align-items: end; margin-bottom: var(--space-6); }
+  .topic-grid { row-gap: var(--space-5); }
+  .classical-lead { margin-bottom: var(--space-7); padding: clamp(1.5rem,4vw,3rem); border-radius: var(--radius-lg); background: var(--navy); color: var(--ivory); }
+  .classical-lead .eyebrow { color: var(--gold-light); }
+  .classical-lead .card { color: var(--navy); }
+  .classical-lead .card > span { color: var(--coral); font-family: var(--serif); font-size: var(--step-2); }
+  .level-paths { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-bottom:var(--space-6); }
+  .level-paths article { padding:var(--space-4);border:1px solid var(--stone);border-radius:var(--radius-md);background:var(--paper-light); }
+  .level-paths h3 { font-size:var(--step-1); }
+  .path-level { width:fit-content;padding:.2rem .55rem;border-radius:999px;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase; }
+  .newcomer{background:#dfe9df}.experienced{background:#e3e8ee}.expert{background:#f0dfd8}
+  .topic-grid h2 { font-size: var(--step-2); }
+  .tool-grid { margin-top: var(--space-5); }
+  .tool-grid article { display: flex; flex-direction: column; align-items: flex-start; padding: var(--space-5); border: 1px solid rgba(247,241,231,.32); border-radius: var(--radius-md); }
+  .tool-grid article > span { color: var(--gold-light); font-size: 2rem; }
+  .tool-grid .button { margin-top: auto; }
+  .source-note { padding: var(--space-5); border: 1px solid var(--stone); border-radius: var(--radius-md); background: var(--paper-light); }
+  .source-note h3 { font-size: var(--step-2); }
+  .source-note li + li { margin-top: .65rem; }
+  @media (max-width: 760px) { .intro-grid,.level-paths { grid-template-columns: 1fr; gap: var(--space-3); } }
+</style>

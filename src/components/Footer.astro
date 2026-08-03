@@ -43,7 +43,7 @@ import { footerGroups, site } from '../data/site';
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr repeat(3, 1fr);
+    grid-template-columns: 1.7fr repeat(4, 1fr);
     gap: var(--space-6);
   }
   .footer-intro {
@@ -70,6 +70,7 @@ import { footerGroups, site } from '../data/site';
     color: inherit;
     text-decoration: none;
   }
+  .site-footer a:hover, .site-footer a:focus-visible { color: var(--gold-light); }
   .newsletter-strip {
     display: flex;
     align-items: center;

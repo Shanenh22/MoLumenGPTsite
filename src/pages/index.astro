@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ValuesBanner from '../components/ValuesBanner.astro';
 import { services } from '../data/services';
 const serviceImages: Record<string, string> = {
   'new-client-natal-chart-reading-90': 'natal-reading',
@@ -36,15 +37,7 @@ const serviceImages: Record<string, string> = {
     </div>
   </section>
 
-  <section class="values-ribbon" aria-label="What guides Mo's work">
-    <div class="container values-track">
-      <div><span aria-hidden="true">◎</span><p><strong>Insight</strong><small>See patterns clearly</small></p></div>
-      <div><span aria-hidden="true">☽</span><p><strong>Empowerment</strong><small>Choose with confidence</small></p></div>
-      <div><span aria-hidden="true">♡</span><p><strong>Compassion</strong><small>A safe place to explore</small></p></div>
-      <div><span aria-hidden="true">↗</span><p><strong>Growth</strong><small>Turn insight into action</small></p></div>
-      <div><span aria-hidden="true">✦</span><p><strong>Your Path</strong><small>Your timing, your way</small></p></div>
-    </div>
-  </section>
+  <ValuesBanner />
 
   <section class="section recognition surface">
     <div class="container grid grid-2">
@@ -154,23 +147,23 @@ const serviceImages: Record<string, string> = {
     <div class="container">
       <div class="grid grid-2">
         <div>
-          <p class="eyebrow">Learn at your own pace</p><h2>Astrology in plain language.</h2>
+          <p class="eyebrow">Inside Mo’s method</p><h2>Classical astrology, clearly distinguished.</h2>
         </div><p class="lede">
-          Understand the four building blocks of a chart—planets, signs, houses, and aspects—without
-          reducing a person to a list of traits.
+          See what is astronomically measured, what comes from classical tradition, and how Mo
+          synthesizes the chart in a practical, nonfatalistic reading.
         </p>
-      </div><div class="grid grid-3 pathway-grid">
-        <a class="card" href="/tools/explore-your-chart/"
-          ><span aria-hidden="true">◎</span><h3>Explore Your Chart</h3><p>
-            An interactive, non-personalized guide to how a chart is organized.
+      </div><div class="grid grid-2 pathway-grid">
+        <a class="card" href="/explore/"
+          ><span aria-hidden="true">✦</span><h3>Classical Library</h3><p>
+            Begin with dignities, sect, and planetary joys, then study the rest of the chart.
           </p></a
         ><a class="card" href="/current-sky/"
           ><span aria-hidden="true">☼</span><h3>Current Sky</h3><p>
-            Learn what is moving overhead and how Mo approaches its themes.
+            Distinguish observable sky movements from their traditional and interpretive layers.
           </p></a
-        ><a class="card" href="/explore/"
-          ><span aria-hidden="true">✦</span><h3>Astrology Library</h3><p>
-            Build a grounded foundation, one clear concept at a time.
+        ><a class="card" href="/blog/"
+          ><span aria-hidden="true">☿</span><h3>Blog</h3><p>
+            A future home for Mo’s essays, teaching notes, and practical sky reflections.
           </p></a
         >
       </div>
@@ -234,16 +227,6 @@ const serviceImages: Record<string, string> = {
   .home-hero .button { background: var(--coral); border-color: var(--coral); }
   .home-hero .button.secondary { border-color: rgba(255,255,255,.65); background: rgba(15,31,53,.24); color: var(--white); }
   .home-hero .lede { color: rgba(255,253,248,.84); }
-  .values-ribbon { border-bottom: 1px solid var(--stone); background: var(--paper-light); }
-  .values-track { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding-block: 1.25rem; }
-  .values-track > div { display: flex; min-width: 0; align-items: center; gap: .75rem; padding: .5rem 1rem; border-right: 1px solid var(--stone); }
-  .values-track > div:last-child { border-right: 0; }
-  .values-track p { margin: 0; }
-  .values-track span { flex: 0 0 auto; color: var(--coral); font-size: 1.8rem; }
-  .values-track div:nth-child(even) span { color: var(--cobalt); }
-  .values-track strong, .values-track small { display: block; }
-  .values-track strong { color: var(--navy); font-size: .75rem; letter-spacing: .07em; text-transform: uppercase; }
-  .values-track small { margin-top: .15rem; color: var(--brown); font-size: .7rem; line-height: 1.3; }
   .recognition-list p {
     padding: 0 0 1rem 1.25rem;
     border-left: 1px solid var(--gold);
@@ -259,6 +242,8 @@ const serviceImages: Record<string, string> = {
     color: var(--white);
     box-shadow: var(--shadow);
   }
+  .finder-card .eyebrow { color: var(--white); }
+  .finder-card .eyebrow::before { background: var(--saffron); }
   .finder-card p {
     max-width: 42rem;
   }

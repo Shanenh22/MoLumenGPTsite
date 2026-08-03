@@ -14,23 +14,23 @@ import { skyEvents } from '../../data/sky-events';
   />
   <section class="section">
     <div class="container grid timeline-layout">
-      <aside>
-        <p class="eyebrow">Filter the timeline</p><button
+      <aside aria-labelledby="filter-heading">
+        <p class="eyebrow" id="filter-heading">Filter the timeline</p><div class="filter-list"><button
           class="filter active"
           type="button"
-          aria-pressed="true">All events</button
-        ><button class="filter" type="button" disabled>New & full moons</button><button
+          aria-pressed="true" data-filter="all"><span aria-hidden="true">✓</span> All events</button
+        ><button class="filter" type="button" aria-pressed="false" data-filter="moon"><span aria-hidden="true"></span> New & full moons</button><button
           class="filter"
-          type="button"
-          disabled>Retrogrades</button
-        ><button class="filter" type="button" disabled>Transits</button>
+          type="button" aria-pressed="false" data-filter="retrograde"><span aria-hidden="true"></span> Retrogrades</button
+        ><button class="filter" type="button" aria-pressed="false" data-filter="transit"><span aria-hidden="true"></span> Transits</button></div>
       </aside><div class="timeline">
+        <p class="result-summary" role="status" aria-live="polite"></p>
         <div class="notice">
           <strong>Staging safeguard:</strong> No astronomical event or interpretation is published until
           its source, time zone, display period, and verification date are reviewed.
         </div>{
           skyEvents.map((event) => (
-            <article>
+            <article data-category={event.category}>
               <>
                 <p class="event-date">{event.date}</p>
                 <div>
@@ -43,7 +43,7 @@ import { skyEvents } from '../../data/sky-events';
               </>
             </article>
           ))
-        }
+        }<div class="empty-state" hidden><h2>No verified events in this category yet</h2><p>Choose another filter or return soon. Mo publishes timing only after it has been reviewed.</p></div>
       </div>
     </div>
   </section>
@@ -65,6 +65,33 @@ import { skyEvents } from '../../data/sky-events';
     </div>
   </section></BaseLayout
 >
+<script>
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const events = [...document.querySelectorAll<HTMLElement>('.timeline article[data-category]')];
+  const summary = document.querySelector<HTMLElement>('.result-summary');
+  const empty = document.querySelector<HTMLElement>('.empty-state');
+  const labels: Record<string, string> = { all: 'all events', moon: 'new and full moon events', retrograde: 'retrogrades', transit: 'transits' };
+  const applyFilter = (selected: HTMLButtonElement) => {
+    const filter = selected.dataset.filter || 'all';
+    let visible = 0;
+    buttons.forEach((button) => {
+      const active = button === selected;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+      const mark = button.querySelector('[aria-hidden]');
+      if (mark) mark.textContent = active ? '✓' : '';
+    });
+    events.forEach((event) => {
+      const show = filter === 'all' || event.dataset.category === filter;
+      event.hidden = !show;
+      if (show) visible++;
+    });
+    if (empty) empty.hidden = visible !== 0;
+    if (summary) summary.textContent = `${visible} ${visible === 1 ? 'item' : 'items'} shown for ${labels[filter]}.`;
+  };
+  buttons.forEach((button) => button.addEventListener('click', () => applyFilter(button)));
+  if (buttons[0]) applyFilter(buttons[0]);
+</script>
 <style>
   .timeline-layout {
     grid-template-columns: 16rem 1fr;
@@ -74,6 +101,8 @@ import { skyEvents } from '../../data/sky-events';
   .timeline-layout aside {
     position: sticky;
     top: 7rem;
+  }
+  .filter-list {
     display: grid;
     gap: 0.5rem;
   }
@@ -89,6 +118,10 @@ import { skyEvents } from '../../data/sky-events';
     background: var(--navy);
     color: white;
   }
+  .filter span { display: inline-block; width: 1.2rem; font-weight: 800; }
+  .result-summary { margin-bottom: .5rem; color: var(--navy-soft); font-size: var(--step--1); font-weight: 700; }
+  .empty-state { margin-top: var(--space-4); padding: var(--space-5); border: 1px solid var(--stone); border-radius: var(--radius-md); background: var(--paper-light); }
+  .empty-state h2 { font-size: var(--step-2); }
   .timeline {
     position: relative;
   }

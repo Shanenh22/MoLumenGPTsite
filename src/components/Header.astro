@@ -1,6 +1,4 @@
 ---
-import { navigation } from '../data/site';
-
 const currentPath = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === '/' ? currentPath === href : currentPath === href || currentPath.startsWith(href);
@@ -13,9 +11,22 @@ const isCurrent = (href: string) =>
       <span class="brand-copy"><strong>Mo Lumen</strong><small>Astrology</small></span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      {navigation.map((item) => (
-        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
-      ))}
+      <a href="/readings/" aria-current={isCurrent('/readings/') ? 'page' : undefined}>Readings</a>
+      <details class="nav-dropdown">
+        <summary>Classical Astrology <span aria-hidden="true">⌄</span></summary>
+        <div class="dropdown-panel">
+          <p>Classical foundation</p>
+          <a href="/explore/essential-dignities/">Essential Dignities <small>Planetary capacity and support</small></a>
+          <a href="/explore/sect/">Sect <small>Day and night chart doctrine</small></a>
+          <a href="/explore/planetary-joys/">Planetary Joys <small>The classical architecture of houses</small></a>
+          <p class="dropdown-group">Library &amp; practice</p>
+          <a href="/explore/" aria-current={isCurrent('/explore/') ? 'page' : undefined}>Classical Library <small>Astronomy, tradition, and Mo’s synthesis</small></a>
+          <a href="/tools/astrology-lab/" aria-current={isCurrent('/tools/astrology-lab/') ? 'page' : undefined}>Astrology Lab <small>Geometry, condition, and synthesis</small></a>
+          <div class="dropdown-secondary"><a href="/current-sky/">Current Sky</a><a href="/videos/">Videos</a></div>
+        </div>
+      </details>
+      <a href="/blog/" aria-current={isCurrent('/blog/') ? 'page' : undefined}>Blog</a>
+      <a href="/about/" aria-current={isCurrent('/about/') ? 'page' : undefined}>About Mo</a>
       <a class="button" href="/book/" aria-current={isCurrent('/book/') ? 'page' : undefined}>Book a Reading</a>
     </nav>
     <div class="mobile-actions">
@@ -32,13 +43,17 @@ const isCurrent = (href: string) =>
         <button class="close-button" type="button">Close <span aria-hidden="true">×</span></button>
       </div>
       <nav aria-label="Mobile navigation">
-        {navigation.map((item, index) => (
-          <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-            <span class="nav-number">0{index + 1}</span><span>{item.label}</span><span aria-hidden="true">↗</span>
-          </a>
-        ))}
-        <a href="/reading-finder/" aria-current={isCurrent('/reading-finder/') ? 'page' : undefined}><span class="nav-number">06</span><span>Find Your Reading</span><span aria-hidden="true">↗</span></a>
-        <a href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}><span class="nav-number">07</span><span>Contact</span><span aria-hidden="true">↗</span></a>
+        <p class="mobile-nav-label">Choose a reading</p>
+        <a href="/reading-finder/"><span class="nav-number">01</span><span>Find Your Reading</span><span aria-hidden="true">↗</span></a>
+        <a href="/readings/"><span class="nav-number">02</span><span>Compare Readings</span><span aria-hidden="true">↗</span></a>
+        <p class="mobile-nav-label">Classical astrology</p>
+        <a href="/explore/"><span class="nav-number">03</span><span>Classical Library</span><span aria-hidden="true">↗</span></a>
+        <a href="/tools/astrology-lab/"><span class="nav-number">04</span><span>Astrology Lab</span><span aria-hidden="true">↗</span></a>
+        <a href="/current-sky/"><span class="nav-number">05</span><span>Current Sky</span><span aria-hidden="true">↗</span></a>
+        <a href="/blog/"><span class="nav-number">06</span><span>Blog</span><span aria-hidden="true">↗</span></a>
+        <p class="mobile-nav-label">Meet &amp; connect</p>
+        <a href="/about/"><span class="nav-number">07</span><span>About Mo</span><span aria-hidden="true">↗</span></a>
+        <a href="/contact/"><span class="nav-number">08</span><span>Contact</span><span aria-hidden="true">↗</span></a>
       </nav>
       <div class="mobile-menu-footer">
         <div class="menu-mo"><img src="/images/mo-5.webp" alt="" width="64" height="64" loading="lazy" /><p><span aria-hidden="true">✦</span> Perspective for real life</p></div>
@@ -52,6 +67,7 @@ const isCurrent = (href: string) =>
   const button = document.querySelector<HTMLButtonElement>('.menu-button');
   const menu = document.querySelector<HTMLElement>('.mobile-menu');
   const close = document.querySelector<HTMLButtonElement>('.close-button');
+  const desktopMenu = document.querySelector<HTMLDetailsElement>('.nav-dropdown');
   let previousFocus: HTMLElement | null = null;
 
   const focusable = () =>
@@ -83,6 +99,10 @@ const isCurrent = (href: string) =>
     if (event.matches && menu && !menu.hidden) closeMenu();
   });
   document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && desktopMenu?.open) {
+      desktopMenu.open = false;
+      desktopMenu.querySelector('summary')?.focus();
+    }
     if (menu?.hidden) return;
     if (event.key === 'Escape') closeMenu();
     if (event.key === 'Tab') {
@@ -98,6 +118,9 @@ const isCurrent = (href: string) =>
         first?.focus();
       }
     }
+  });
+  document.addEventListener('click', (event) => {
+    if (desktopMenu?.open && !desktopMenu.contains(event.target as Node)) desktopMenu.open = false;
   });
 </script>
 
@@ -140,6 +163,24 @@ const isCurrent = (href: string) =>
   .desktop-nav > a:not(.button) {
     text-decoration: none;
   }
+  .desktop-nav > a:not(.button), .nav-dropdown summary { padding: .45rem .55rem; }
+  .desktop-nav > a:not(.button):hover,
+  .desktop-nav > a:not(.button):focus-visible,
+  .nav-dropdown summary:hover,
+  .nav-dropdown summary:focus-visible { border-radius: .35rem; background: var(--gold-light); color: var(--navy); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown summary { cursor: pointer; list-style: none; font-weight: 600; }
+  .nav-dropdown summary::-webkit-details-marker { display: none; }
+  .dropdown-panel { position: absolute; top: calc(100% + .75rem); left: 50%; width: 21rem; padding: 1rem; transform: translateX(-50%); border: 1px solid var(--gold-light); border-radius: var(--radius-md); background: var(--paper-light); color: var(--navy); box-shadow: var(--shadow); }
+  .dropdown-panel::before { position: absolute; top: -.45rem; left: 50%; width: .8rem; height: .8rem; transform: translateX(-50%) rotate(45deg); border-left: 1px solid var(--gold-light); border-top: 1px solid var(--gold-light); background: var(--paper-light); content: ''; }
+  .dropdown-panel p { margin: 0 0 .5rem; color: var(--clay); font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .dropdown-panel .dropdown-group { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--stone); }
+  .dropdown-panel > a { display: block; padding: .7rem; border-radius: .45rem; color: var(--navy); text-decoration: none; }
+  .dropdown-panel > a:hover, .dropdown-panel > a:focus-visible { background: var(--paper); color: var(--navy); }
+  .dropdown-panel > a[aria-current='page'] { border-left: .25rem solid var(--coral); background: var(--paper); }
+  .dropdown-panel small { display: block; margin-top: .1rem; color: var(--navy-soft); font-size: .72rem; }
+  .dropdown-secondary { display: flex; gap: 1rem; margin-top: .5rem; padding: .75rem .7rem 0; border-top: 1px solid var(--stone); }
+  .dropdown-secondary a { color: var(--navy); font-size: .8rem; font-weight: 700; }
   .desktop-nav > a[aria-current='page']:not(.button) {
     text-decoration: underline;
     text-decoration-color: var(--gold);
@@ -228,19 +269,23 @@ const isCurrent = (href: string) =>
   }
   .mobile-menu nav {
     display: grid;
-    margin-block: 2rem;
+    margin-block: 1rem;
+    overflow-y: auto;
   }
   .mobile-menu nav a {
     display: grid;
     grid-template-columns: 2.25rem 1fr auto;
     align-items: center;
     gap: 0.75rem;
-    padding-block: 0.72rem;
+    min-height: 3rem;
+    padding-block: 0.52rem;
     border-bottom: 1px solid rgba(247, 241, 231, 0.2);
     font-family: var(--serif);
-    font-size: clamp(1.25rem, 5vw, 1.65rem);
+    font-size: clamp(1.05rem, 4.4vw, 1.35rem);
     text-decoration: none;
   }
+  .mobile-menu nav a:hover, .mobile-menu nav a:focus-visible { padding-inline: .5rem; background: var(--gold-light); color: var(--navy); }
+  .mobile-nav-label { margin: .8rem 0 0; color: var(--gold-light); font-size: .65rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
   .mobile-menu nav a[aria-current='page'] {
     color: var(--gold-light);
   }

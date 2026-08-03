@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<BaseLayout title="Blog" description="Future essays and sky notes from Mo Lumen Astrology.">
+  <PageHero eyebrow="The Mo Lumen blog" title="Classical astrology, thoughtfully applied." lede="Essays, teaching notes, and reflections from Mo will live here." />
+  <section class="section">
+    <div class="container blog-intro">
+      <div><p class="eyebrow">Coming soon</p><h2>A clear home for Mo’s writing.</h2><p>No placeholder articles or invented publication dates—just a considered space ready for the work you provide later.</p></div>
+      <aside><h3>What to expect</h3><ul><li>Classical techniques explained in plain language</li><li>Current-sky notes that separate astronomy from interpretation</li><li>Practical reflections on relationships, timing, and choice</li></ul></aside>
+    </div>
+    <div class="container signup"><div><p class="eyebrow">Letters from Mo</p><h2>Know when the first essay arrives.</h2></div><a class="button" href="/newsletter/">Join the newsletter</a></div>
+  </section>
+</BaseLayout>
+<style>.blog-intro{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-6);align-items:start}.blog-intro aside,.signup{padding:var(--space-5);border:1px solid var(--stone);border-radius:var(--radius-md);background:var(--paper-light)}.signup{display:flex;align-items:center;justify-content:space-between;gap:2rem;margin-top:var(--space-6)}.signup h2{margin:0}@media(max-width:700px){.blog-intro{grid-template-columns:1fr}.signup{align-items:flex-start;flex-direction:column}}</style>
